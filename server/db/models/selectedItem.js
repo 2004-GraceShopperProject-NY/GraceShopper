@@ -16,7 +16,7 @@ const SelectedItem = db.define('selectedItems', {
     }
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.INTEGER
   }
 });
 

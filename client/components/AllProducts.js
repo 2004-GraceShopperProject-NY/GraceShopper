@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../store/products';
 import {Link} from 'react-router-dom';
+import {priceToDollar} from '../utilities/convertPriceToDollars';
 
 class AllProducts extends Component {
   componentDidMount() {
@@ -20,7 +21,7 @@ class AllProducts extends Component {
               <img src={product.imageUrl} height="200px" />
             </Link>
             <h6>{product.name}</h6>
-            <h6>Price: ${(product.price / 100).toFixed(2)}</h6>
+            <h6>Price: {priceToDollar(product.price)}</h6>
           </div>
         ))}
       </div>

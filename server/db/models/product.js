@@ -18,6 +18,7 @@ const Product = db.define('product', {
     default: 100
   },
   price: {
+    type: Sequelize.DECIMAL(10, 2),
     type: Sequelize.INTEGER,
     default: '2000'
   },

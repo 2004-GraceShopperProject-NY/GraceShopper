@@ -56,6 +56,20 @@ form div {
   color: black;
 }
 
+.button-add-quantity {
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: #afeeee;
+  color: black;
+}
+
+.button-add-to-cart {
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: #afeeee;
+  color: black;
+}
+
 .label-text-style {
   font-size: 20px;
 }
@@ -63,4 +77,45 @@ form div {
 .col {
   padding: 0px;
   margin: 0px;
+}
+
+.single-in-all-products {
+  padding: 20px;
+  text-align: center;
+  padding: 1em;
+  margin: 1em;
+  border: 4px solid #afeeee;
+  height: 300px;
+  width: 300px;
+}
+
+.all-products {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.title-all-products {
+  padding: 10px;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.title-single-product {
+  padding-top: 10px;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: center;
+}
+
+.single-view-item {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  text-align: center;
+  padding: 1em;
+  margin: 1em;
+  border: 4px solid #afeeee;
 }

@@ -4,11 +4,11 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import {Navbar} from 'react-bootstrap';
+import {RiShoppingCartLine} from 'react-icons/ri';
 
 const MainNavbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>PANDEMIC ESSENTIALS</h1>
-    <Navbar bg="dark" variant="dark">
+    <Navbar className="navbar-style" expand="lg">
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -18,8 +18,15 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
           </a>
         </div>
       ) : (
-        <div>
+        <div className="navbar-text">
           {/* The navbar will show these links before you log in */}
+          <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
+          <Link to="#">PE</Link>
+          <Link to="#">Products</Link>
+          <Link to="#">
+            {' '}
+            <RiShoppingCartLine size={32} color="black" />
+          </Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/products">Products</Link>

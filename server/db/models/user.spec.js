@@ -1,51 +1,44 @@
-// /* global describe beforeEach it */
+const {expect} = require('chai');
+const db = require('../index');
+const User = db.model('user');
 
-// const {expect} = require('chai')
-// const db = require('../index')
-// const User = db.model('user')
+describe('User test specs', () => {
+  describe('User model', () => {
+    describe('Validations', () => {
+      it('requires `firstName`', async () => {
+        const testUser1 = User.build({
+          firstName: '',
+          lastName: 'defined',
+          email: 'emailexists@email.com'
+        });
 
-// describe('User model', () => {
-//   beforeEach(() => {
-//     return db.sync({force: true})
-//   })
-//     describe('Validations', () => {
-//       it('requires `name` to not be an empty string', async () => {
-//         const user = User.build({
-//           firstName: ''
-//         });
+        try {
+          await testUser1.validate();
+          throw Error(
+            'validation was successful but should have failed without `firstName`'
+          );
+        } catch (err) {
+          expect(err.message).to.contain('failed');
+        }
+      });
 
-//         it('require "firstName"', async() => {
-//         const user = User.build({
-//           firstName: ''
-//         })
-//         try{
-//           user.validate()
-//           throw Error('validation was successful, but should have failed if first name is an empty string')
-//         } catch(error) {
-//             expect(error.message).to.contain('validation error')
-//         }
-//       })
+      it('requires `firstName` to not be an empty string', async () => {
+        const testUser2 = User.build({
+          firstName: '',
+          lastName: 'defined',
+          email: 'emailexists@email.com'
+        });
 
-//     });
-
-//   // describe('instanceMethods', () => {
-//   //   describe('correctPassword', () => {
-//   //     let cody
-
-//   //     beforeEach(async () => {
-//   //       cody = await User.create({
-//   //         email: 'cody@puppybook.com',
-//   //         password: 'bones'
-//   //       })
-//   //     })
-
-//   //     it('returns true if the password is correct', () => {
-//   //       expect(cody.correctPassword('bones')).to.be.equal(true)
-//   //     })
-
-//   //     it('returns false if the password is incorrect', () => {
-//   //       expect(cody.correctPassword('bonez')).to.be.equal(false)
-//   //     })
-//   //   }) // end describe('correctPassword')
-//   // }) // end describe('instanceMethods')
-// }) // end describe('User model')
+        try {
+          await testUser2.validate();
+          throw Error(
+            'validation was successful but should have failed if firstName is an empty string'
+          );
+        } catch (err) {
+          expect(err.message).to.contain('failed');
+          /* handle error */
+        }
+      });
+    });
+  });
+});

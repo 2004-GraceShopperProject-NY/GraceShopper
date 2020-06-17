@@ -7,7 +7,7 @@ const products = [
   {
     name: 'Toilet Paper',
     quantity: 100,
-    price: 15.0,
+    price: '1500',
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/9133wpvx-uL._AC_SL1500_.jpg',
     description: 'Just got real with Scott ComfortPlus Toilet paper'
@@ -15,7 +15,7 @@ const products = [
   {
     name: 'Mask',
     quantity: 100,
-    price: 25.0,
+    price: '2500',
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/610PmB1Ky2L._AC_SY450_.jpg',
     description: 'Fashionable masks for a reasonable price!'
@@ -23,10 +23,24 @@ const products = [
   {
     name: 'Hand Sanitizer',
     quantity: 50,
-    price: 8.5,
+    price: '850',
     imageUrl:
       'https://assets1.progressivegrocer.com/files/styles/content_sm/s3/2020-03/Hand%20Sanitizer.jpg?itok=t9yY12oR',
     description: 'DESTROY those germs!!'
+  },
+  {
+    name: 'Clorax',
+    quantity: 100,
+    price: '1200',
+    imageUrl: 'https://m.media-amazon.com/images/I/81YT7MiwwTL._AC_UL320_.jpg',
+    description: 'Helps with disinfecting'
+  },
+  {
+    name: 'Water',
+    quantity: 100,
+    price: '1000',
+    imageUrl: 'https://m.media-amazon.com/images/I/91XvFZyTzbL._AC_UL320_.jpg',
+    description: 'Get your ionized lifewater here! 3 bottles, 500 mL each'
   }
 ];
 

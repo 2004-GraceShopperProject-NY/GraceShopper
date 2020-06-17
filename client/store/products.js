@@ -36,7 +36,7 @@ export const subQuantity = product => {
   };
 };
 
-export const addToCart = product => {
+export const addedToCart = product => {
   return {
     type: ADD_TO_CART,
     product
@@ -60,6 +60,16 @@ export const getSingleProduct = productId => {
     try {
       const {data} = await Axios.get(`/api/products/${productId}`);
       dispatch(singleProduct(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addToCartThunk = product => {
+  return dispatch => {
+    try {
+      dispatch(addedToCart(product));
     } catch (error) {
       console.log(error);
     }

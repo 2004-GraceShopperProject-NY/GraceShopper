@@ -52,7 +52,7 @@ class SingleProduct extends Component {
             <img src={product.imageUrl} height="200px" />
           </Col>
           <Col>
-            <div>Price: {(product.price / 100).toFixed(2)}</div>
+            <div>Price: {priceToDollar(product.price)}</div>
             <div>Quantity</div>
             <div>Description:</div>
             <div>{product.description}</div>

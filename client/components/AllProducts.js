@@ -4,6 +4,7 @@ import {fetchProducts} from '../store/products';
 import {Link} from 'react-router-dom';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Button} from 'reactstrap';
+import {priceToDollar} from '../utilities/convertPriceToDollars';
 
 class AllProducts extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ class AllProducts extends Component {
 
     return (
       <div>
+         front-end-work-and-redux
         <h2 className="title-all-products">What are you looking for today?</h2>
         <div className="all-products">
           {products.map(product => (
@@ -30,6 +32,17 @@ class AllProducts extends Component {
             </div>
           ))}
         </div>
+
+        <h2>Viewing All Products: </h2>
+        {products.map(product => (
+          <div key={product.id}>
+            <Link to={`/products/${product.id}`}>
+              <img src={product.imageUrl} height="200px" />
+            </Link>
+            <h6>{product.name}</h6>
+            <h6>Price: {priceToDollar(product.price)}</h6>
+          </div>
+        ))}
       </div>
     );
   }

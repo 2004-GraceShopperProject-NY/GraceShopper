@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getSingleProduct} from '../store/products';
 import {Container, Col, Row, Button} from 'reactstrap';
+import {priceToDollar} from '../utilities/convertPriceToDollars';
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -25,6 +26,9 @@ class SingleProduct extends Component {
             <div>{product.description}</div>
           </Col>
         </div>
+        <p>{product.name}</p>
+        <p>Price: {priceToDollar(product.price)}</p>
+        <p>Description: {product.description}</p>
       </div>
     );
   }

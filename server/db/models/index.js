@@ -1,6 +1,7 @@
 const User = require('./user');
-// const CartedProduct = require('./cartedProduct')
-// const Product = require('./product')
+const SelectedItem = require('./SelectedItem');
+const Product = require('./product');
+const Order = require('./order');
 
 
 /**
@@ -17,12 +18,15 @@ const User = require('./user');
  * instead of: const User = require('../db/models/user')
  */
 
-//  User.hasMany(CartedProduct)
-//  CartedProduct.belongsTo(User)
-//  CartedProduct.hasOne(Product)
+
+User.hasMany(Order);
+Product.belongsToMany(Order, {through: SelectedItem});
+Order.belongsToMany(Product, {through: SelectedItem});
 
 module.exports = {
   User,
-  CartedProduct,
-  Product
-}
+  SelectedItem,
+  Product,
+  Order
+};
+

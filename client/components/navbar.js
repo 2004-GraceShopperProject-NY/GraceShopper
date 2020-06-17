@@ -21,15 +21,14 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
         <div className="navbar-text">
           {/* The navbar will show these links before you log in */}
           <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
-          <Link to="#">PE</Link>
-          <Link to="#">Products</Link>
+          <Link to="/home">Home</Link>
+          <Link to="/products">Products</Link>
           <Link to="#">
             {' '}
             <RiShoppingCartLine size={32} color="black" />
           </Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
-          <Link to="/products">Products</Link>
         </div>
       )}
     </Navbar>

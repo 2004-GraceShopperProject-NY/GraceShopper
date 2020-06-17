@@ -38,7 +38,7 @@
       "git add"
     ]
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Anna Morozova, Connie Lok, Eda Deniz, Jennifer Yang ",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",

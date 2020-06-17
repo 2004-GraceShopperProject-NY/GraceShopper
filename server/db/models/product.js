@@ -18,6 +18,7 @@ const Product = db.define('product', {
     default: 100
   },
   price: {
+    //change to Integer. Store in pennies. --> func to $$$
     type: Sequelize.DECIMAL(10, 2),
     default: '2000'
   },

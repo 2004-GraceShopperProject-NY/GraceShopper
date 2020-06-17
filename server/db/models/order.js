@@ -5,7 +5,7 @@ const Order = db.define('order', {
   date: {
     type: Sequelize.DATE
   },
-  confirmation: {
+  confirmationNum: {
     type: Sequelize.INTEGER
   },
   bought: {

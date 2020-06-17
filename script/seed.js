@@ -1,13 +1,13 @@
 'use strict';
 
 const db = require('../server/db');
-const {User, Product} = require('../server/db/models');
+const {User, Product, SelectedItem, Order} = require('../server/db/models');
 
 const products = [
   {
     name: 'Toilet Paper',
     quantity: 100,
-    price: '15.00',
+    price: 15.0,
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/9133wpvx-uL._AC_SL1500_.jpg',
     description: 'Just got real with Scott ComfortPlus Toilet paper'
@@ -15,7 +15,7 @@ const products = [
   {
     name: 'Mask',
     quantity: 100,
-    price: '25.00',
+    price: 25.0,
     imageUrl:
       'https://images-na.ssl-images-amazon.com/images/I/610PmB1Ky2L._AC_SY450_.jpg',
     description: 'Fashionable masks for a reasonable price!'
@@ -23,7 +23,7 @@ const products = [
   {
     name: 'Hand Sanitizer',
     quantity: 50,
-    price: '8.50',
+    price: 8.5,
     imageUrl:
       'https://assets1.progressivegrocer.com/files/styles/content_sm/s3/2020-03/Hand%20Sanitizer.jpg?itok=t9yY12oR',
     description: 'DESTROY those germs!!'
@@ -47,6 +47,14 @@ const users = [
   }
 ];
 
+const orders = [
+  {
+    date: new Date(),
+    confirmationNum: 10000,
+    bought: false
+  }
+];
+
 async function seed() {
   try {
     await db.sync({force: true});
@@ -63,6 +71,30 @@ async function seed() {
         return User.create(user);
       })
     );
+
+    await Promise.all(
+      orders.map(order => {
+        return Order.create(order);
+      })
+    );
+
+    const order = await Order.findByPk(1);
+    const product1 = await Product.findByPk(1);
+    const product2 = await Product.findByPk(2);
+    await order.addProduct(product1, {
+      through: {
+        date: new Date(),
+        quantity: 8,
+        price: 5.5
+      }
+    });
+    await order.addProduct(product2, {
+      through: {
+        date: new Date(),
+        quantity: 5,
+        price: 12.75
+      }
+    });
 
     console.log(`seeded successfully`);
   } catch (error) {

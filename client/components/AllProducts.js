@@ -16,7 +16,7 @@ class AllProducts extends Component {
 
     return (
       <div>
-         front-end-work-and-redux
+        front-end-work-and-redux
         <h2 className="title-all-products">What are you looking for today?</h2>
         <div className="all-products">
           {products.map(product => (
@@ -25,14 +25,13 @@ class AllProducts extends Component {
                 <img src={product.imageUrl} height="200px" />
               </Link>
               <h6>{product.name}</h6>
-              <h6>Price: ${(product.price / 100).toFixed(2)}</h6>
+              <h6>Price: {priceToDollar(product.price)}</h6>
               <Button className="button-add-to-cart">
                 Add to <RiShoppingCartLine size={20} color="black" />
               </Button>
             </div>
           ))}
         </div>
-
         <h2>Viewing All Products: </h2>
         {products.map(product => (
           <div key={product.id}>

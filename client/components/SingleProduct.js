@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getSingleProduct, addToCartThunk} from '../store/products';
+import {getSingleProduct} from '../store/products';
 import {Container, Col, Row, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
+import {addToCartThunk} from '../store/cart';
 
 class SingleProduct extends Component {
   constructor() {
@@ -52,7 +53,7 @@ class SingleProduct extends Component {
             <img src={product.imageUrl} height="200px" />
           </Col>
           <Col>
-            <div>Price: {(product.price / 100).toFixed(2)}</div>
+            <div>Price: {priceToDollar(product.price)}</div>
             <div>Quantity</div>
             <div>Description:</div>
             <div>{product.description}</div>

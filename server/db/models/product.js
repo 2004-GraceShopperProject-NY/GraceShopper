@@ -15,11 +15,11 @@ const Product = db.define('product', {
   },
   quantity: {
     type: Sequelize.INTEGER,
-    default: 100
+    defaultValue: 100
   },
   price: {
     type: Sequelize.INTEGER,
-    default: '2000'
+    defaultValue: '2000'
   },
   imageUrl: {
     type: Sequelize.STRING

@@ -52,8 +52,8 @@ const User = db.define('user', {
     }
   },
   role: {
-    type: Sequelize.ENUM('admin', 'guest', 'customer'),
-    defaultValue: 'guest'
+    type: Sequelize.ENUM('admin', 'customer'),
+    defaultValue: 'customer'
   }
 });
 

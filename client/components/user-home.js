@@ -12,6 +12,7 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
+      <button onClick={() => axios.post('/api/cart', {id: 1})} />
     </div>
   );
 };

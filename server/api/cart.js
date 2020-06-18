@@ -3,12 +3,13 @@ const {Order} = require('../db/models');
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('user', req.user);
     if (req.user) {
       const order = await Order.addOrCreateOrder(req.user.id);
-      console.log('order', order);
-
+      if (order) {
+        order.addItemToOrder(req.body.id, order.id);
+      }
       res.json(order);
+
     } else {
       res.sendStatus(404);
     }

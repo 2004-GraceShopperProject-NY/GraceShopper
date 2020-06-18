@@ -1,5 +1,5 @@
 const User = require('./user');
-const SelectedItem = require('./SelectedItem');
+const SelectedItem = require('./selectedItem');
 const Product = require('./product');
 const Order = require('./order');
 

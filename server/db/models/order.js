@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const SelectedItem = require('./selectedItem');
 
 const Order = db.define('order', {
   date: {
@@ -7,7 +8,7 @@ const Order = db.define('order', {
     defaultValue: Date.now()
   },
   confirmationNum: {
-    type: Sequelize.INTEGER
+    type: Sequelize.BIGINT
   },
   bought: {
     type: Sequelize.BOOLEAN,
@@ -23,11 +24,10 @@ const createConfirmationNumber = () => {
   }
   let rollDie = getRandomizer(1, 6);
   let results = '';
-  for (let i = 0; i < 1000; i++) {
-    results += rollDie() + ' ';
+  for (let i = 0; i < 10; i++) {
+    results += rollDie();
   }
-
-  return results;
+  return parseInt(results);
 };
 
 Order.addOrCreateOrder = async function(userId) {
@@ -48,6 +48,18 @@ Order.addOrCreateOrder = async function(userId) {
   }
 };
 
-Order.prototype.addItemToOrder = async function(productId) {};
+// add item to that order#
+Order.prototype.addItemToOrder = async function(productId, orderId) {
+  const item = await SelectedItem.findOne({
+    where: {
+      productId,
+      orderId
+    }
+  });
+  if (item) {
+    await item.update({quantity: item.quantity + 1});
+  }
+  return item;
+};
 
 module.exports = Order;

@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-const {now} = require('sequelize/types/lib/utils');
-const {validator} = require('sequelize/types/lib/utils/validator-extras');
 
 const Order = db.define('order', {
   date: {

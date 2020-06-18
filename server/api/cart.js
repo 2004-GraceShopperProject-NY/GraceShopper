@@ -9,7 +9,6 @@ router.post('/', async (req, res, next) => {
         order.addItemToOrder(req.body.id, order.id);
       }
       res.json(order);
-
     } else {
       res.sendStatus(404);
     }

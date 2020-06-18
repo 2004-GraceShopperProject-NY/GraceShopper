@@ -11,6 +11,7 @@ const SelectedItem = db.define('selectedItems', {
   },
   quantity: {
     type: Sequelize.INTEGER,
+    defaultValue: 1,
     validate: {
       min: 1
     }

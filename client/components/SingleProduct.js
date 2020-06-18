@@ -37,7 +37,7 @@ class SingleProduct extends Component {
       cart[productId] = qty;
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    addToCartThunk(this.props.product);
+    this.props.addToCartThunk(this.props.product);
     console.log('local Storage', localStorage);
     console.log('state cart', this.props.cart);
   };

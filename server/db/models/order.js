@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const SelectedItem = require('./selectedItem');
+const Product = require('./product');
 
 const Order = db.define('order', {
   date: {
@@ -58,6 +59,13 @@ Order.prototype.addItemToOrder = async function(productId, orderId) {
   });
   if (item) {
     await item.update({quantity: item.quantity + 1});
+  } else {
+    const product = await Product.findByPk(productId);
+    await SelectedItem.create({
+      productId,
+      orderId,
+      price: product.price
+    });
   }
   return item;
 };

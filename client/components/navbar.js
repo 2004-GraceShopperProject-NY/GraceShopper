@@ -23,7 +23,7 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
           <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
           <Link to="/home">Home</Link>
           <Link to="/products">Products</Link>
-          <Link to="#">
+          <Link to="/cart">
             {' '}
             <RiShoppingCartLine size={32} color="black" />
           </Link>

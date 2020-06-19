@@ -56,6 +56,13 @@ form div {
   color: black;
 }
 
+.button-remove-from-cart {
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: red;
+  color: white;
+}
+
 .button-add-quantity {
   margin-right: 10px;
   margin-left: 10px;
@@ -70,6 +77,14 @@ form div {
   color: black;
 }
 
+.button-checkout {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 50px;
+  background-color: yellow;
+  color: black;
+}
+
 .label-text-style {
   font-size: 20px;
 }
@@ -77,6 +92,17 @@ form div {
 .col {
   padding: 0px;
   margin: 0px;
+}
+
+.cart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title-cart {
+  text-align: center;
 }
 
 .single-in-all-products {

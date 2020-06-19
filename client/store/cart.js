@@ -1,7 +1,7 @@
 //ACTION TYPES
 const ADD_QUANTITY = 'ADD_QUANTITY';
 const SUB_QUANTITY = 'SUB_QUANTITY';
-const ADD_TO_CART = 'ADD_TO_CART';
+const GET_CART_ITEMS = 'GET_CART_ITEMS';
 
 //ACTION CREATORS
 export const addQuantity = product => {
@@ -18,10 +18,10 @@ export const subQuantity = product => {
   };
 };
 
-export const addedToCart = product => {
+export const getCartItems = cart => {
   return {
-    type: ADD_TO_CART,
-    product
+    type: GET_CART_ITEMS,
+    cart
   };
 };
 
@@ -29,45 +29,57 @@ export const addedToCart = product => {
 export const addToCartThunk = product => {
   return dispatch => {
     try {
-      dispatch(addedToCart(product));
+      let cart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : {};
+      let productId = product.id;
+      cart[productId] = cart[productId] ? cart[productId] : 0;
+      let qty = parseInt(cart[productId]) + parseInt(1);
+      if (product.available_quantity < qty) {
+        cart[productId] = product.available_quantity;
+      } else {
+        cart[productId] = qty;
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      dispatch(getCartItems(cart));
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-const initialState = {
-  cart: []
+export const getCartThunk = product => {
+  return dispatch => {
+    try {
+      let cart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart'))
+        : {};
+      dispatch(getCartItems(cart));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 
-export default function cartReducer(state = initialState, action) {
+export default function cartReducer(cart = [], action) {
   switch (action.type) {
-    case ADD_TO_CART:
-      return {
-        ...state,
-        cart: [...state.cart, {quantity: 1, product: action.product}]
-      };
+    case GET_CART_ITEMS:
+      return action.cart;
     case SUB_QUANTITY:
-      return {
-        ...state,
-        cart: state.cart.map(product => {
-          if (product.product.name === action.product.name) {
-            return {...product, quantity: product.quantity - 1};
-          }
-          return product;
-        })
-      };
+      return cart.map(product => {
+        if (product.product.name === action.product.name) {
+          return {...product, quantity: product.quantity - 1};
+        }
+        return product;
+      });
     case ADD_QUANTITY:
-      return {
-        ...state,
-        cart: state.cart.map(product => {
-          if (product.product.name === action.product.name) {
-            return {...product, quantity: product.quantity + 1};
-          }
-          return product;
-        })
-      };
+      return cart.cart.map(product => {
+        if (product.product.name === action.product.name) {
+          return {...product, quantity: product.quantity + 1};
+        }
+        return product;
+      });
     default:
-      return state;
+      return cart;
   }
 }

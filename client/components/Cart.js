@@ -1,49 +1,73 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import React from 'react';
-import {addToCartThunk} from '../store/cart';
+import {addToCartThunk, getCartThunk} from '../store/cart';
+import SingleCartItem from './SingleCartItem';
+import {fetchProducts} from '../store/products';
+import {RiShoppingCartLine} from 'react-icons/ri';
+import {Button, Row} from 'reactstrap';
 
 class Cart extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     cart: [],
-  //     total: 0
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.findProduct = this.findProduct.bind(this);
+  }
 
-  componentDidMount() {
-    let cart = localStorage.getItem('cart');
-    console.log(cart);
-    if (!cart) return;
+  componentWillMount() {
+    this.props.allProducts();
+    this.props.getCartThunk();
+  }
 
-    // addToCartThunk(cart).then((products) => {
-    //   let total = 0;
-    //   for (let i = 0; i < products.length; i++) {
-    //     total += products[i].price * products[i].qty;
-    //   }
-    //   this.getState({ cart, total });
-    //   });
+  findProduct(id) {
+    let product = this.props.products.find(product => {
+      return product.id === parseInt(id);
+    });
+    return product;
   }
 
   render() {
-    return (
-      <div>
-        <h1> Your current cart: </h1>
-      </div>
-    );
+    if (this.props.products.length)
+      return (
+        <div className="cart">
+          <h1 className="title-cart">
+            {' '}
+            Your <RiShoppingCartLine size={32} color="black" />{' '}
+          </h1>
+          {Object.keys(this.props.cart).map(id => (
+            <SingleCartItem
+              key={id}
+              product={this.findProduct(id)}
+              quantity={this.props.cart[id]}
+            />
+          ))}
+          <Button size="lg" className="button-checkout">
+            Checkout
+          </Button>
+        </div>
+      );
+    else
+      return (
+        <div>
+          <h1>
+            {' '}
+            <RiShoppingCartLine size={20} color="black" /> is empty{' '}
+          </h1>
+        </div>
+      );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart.cart
+    cart: state.cart,
+    products: state.products.allProducts
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToCartThunk: () => dispatch(addToCartThunk())
+    addToCartThunk: () => dispatch(addToCartThunk()),
+    getCartThunk: () => dispatch(getCartThunk()),
+    allProducts: () => dispatch(fetchProducts())
   };
 };
 

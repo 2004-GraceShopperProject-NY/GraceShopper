@@ -1,33 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getSingleProduct} from '../store/products';
-import {Col, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {addToCartThunk} from '../store/cart';
+import {Col, Button} from 'reactstrap';
 
-class SingleProduct extends Component {
+class SingleCartItem extends Component {
   constructor() {
     super();
-    this.addToCart = this.addToCart.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.getSingleProduct(this.props.match.params.id);
   }
 
   handleInputChange = event =>
     this.setState({[event.target.name]: event.target.value});
 
-  addToCart = () => {
-    console.log('we are in addToCart', this.props.product);
-    this.props.addToCartThunk(this.props.product);
-  };
-
   render() {
     const {product} = this.props;
-
+    const {quantity} = this.props;
     return (
       <div>
         <h2 className="title-single-product">{product.name}</h2>
@@ -37,22 +25,24 @@ class SingleProduct extends Component {
           </Col>
           <Col>
             <div>Price: {priceToDollar(product.price)}</div>
+            <div>Quantity</div>
             <div>Description:</div>
             <div>{product.description}</div>
-            <div>Quantity</div>
             <input
+              className="quantity"
               type="number"
-              value={1}
+              min="0"
+              value={quantity}
               name="quantity"
               onChange={this.handleInputChange}
-              className="float-right"
+              // className="float-right"
               style={{width: '60px', marginRight: '10px', borderRadius: '3px'}}
             />
             <Button
-              className="button-add-to-cart"
+              className="button-remove-from-cart"
               onClick={() => this.addToCart()}
             >
-              Add to <RiShoppingCartLine size={20} color="black" />
+              Remove from <RiShoppingCartLine size={20} color="black" />
             </Button>
           </Col>
         </div>
@@ -63,16 +53,8 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.products.selectedProduct,
     cart: state.products.cart
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getSingleProduct: productId => dispatch(getSingleProduct(productId)),
-    addToCartThunk: product => dispatch(addToCartThunk(product))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
+export default connect(mapStateToProps, null)(SingleCartItem);

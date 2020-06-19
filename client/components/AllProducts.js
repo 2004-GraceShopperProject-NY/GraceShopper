@@ -16,7 +16,6 @@ class AllProducts extends Component {
 
     return (
       <div>
-        front-end-work-and-redux
         <h2 className="title-all-products">What are you looking for today?</h2>
         <div className="all-products">
           {products.map(product => (

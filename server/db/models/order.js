@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 const SelectedItem = require('./selectedItem');
 const Product = require('./product');
+const User = require('./user');
 
 const Order = db.define('order', {
   date: {
@@ -41,10 +42,11 @@ Order.addOrCreateOrder = async function(userId) {
   if (order) {
     return order;
   } else {
+    const user = await User.findByPk(userId);
     const newOrder = await Order.create({
-      userId,
       confirmationNum: createConfirmationNumber()
     });
+    await user.addOrder(newOrder);
     return newOrder;
   }
 };

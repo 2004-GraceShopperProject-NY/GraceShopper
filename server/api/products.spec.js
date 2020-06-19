@@ -49,14 +49,12 @@ describe('Product routes', () => {
     });
 
     it('GET /api/products/:productID', async () => {
-      const res = await request(app);
-      console
-        .log(res)
-        .get('/api/products/:productID')
+      const res = await request(app)
+        .get('/api/products/1')
         .expect(200);
 
-      expect(res.body).to.be.an('array');
-      expect(res.body[0].price).to.be.equal('1000');
+      expect(res.body.name).to.be.equal('mask');
+      expect(res.body.price).to.be.equal(1000);
     });
   });
 }); // end describe('Products routes')

@@ -23,22 +23,4 @@ router.get('/:productID', async (req, res, next) => {
   }
 });
 
-// FIND BY NAME
-// router.get('/:name', async (req, res, next) => {
-//   try {
-//     const product = await Product.findOne({
-//       where: {
-//         name: req.params.name
-//       }
-//     });
-//     if (!product) {
-//       res.sendStatus(404);
-//     } else {
-//       res.json(product);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 module.exports = router;

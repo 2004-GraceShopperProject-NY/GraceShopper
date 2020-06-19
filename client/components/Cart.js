@@ -4,7 +4,7 @@ import {addToCartThunk, getCartThunk} from '../store/cart';
 import SingleCartItem from './SingleCartItem';
 import {fetchProducts} from '../store/products';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {Button, Row} from 'reactstrap';
+import {Button} from 'reactstrap';
 
 class Cart extends Component {
   constructor(props) {

@@ -22,6 +22,30 @@ const AuthForm = props => {
     <Container className="App">
       <Form className="form" onSubmit={handleSubmit} name={name}>
         <h2>{displayName}</h2>
+        {name === 'signup' ? (
+          <div>
+            <Col>
+              <FormGroup>
+                <Label className="label-text-style" for="exampleFName">
+                  First Name
+                </Label>
+                <Input
+                  name="fname"
+                  type="text"
+                  placeholder="Enter First Name"
+                />
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup>
+                <Label className="label-text-style" for="exampleLName">
+                  Last Name
+                </Label>
+                <Input name="lname" type="text" placeholder="Enter Last Name" />
+              </FormGroup>
+            </Col>
+          </div>
+        ) : null}
         <Col>
           <FormGroup>
             <Label className="label-text-style" for="exampleEmail">
@@ -78,9 +102,11 @@ const mapDispatch = dispatch => {
     handleSubmit(evt) {
       evt.preventDefault();
       const formName = evt.target.name;
+      const firstName = evt.target.fname.value;
+      const lastName = evt.target.lname.value;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(auth(email, password, formName));
+      dispatch(auth(firstName, lastName, email, password, formName));
     }
   };
 };

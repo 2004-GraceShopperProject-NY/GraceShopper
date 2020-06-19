@@ -1,10 +1,22 @@
 import React from 'react';
+import {Col, Row, Link, Button} from 'reactstrap';
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="home-page-view">
       <h3 className="title-home-page">Welcome to Pandemic Essentials!</h3>
-      <h6 />
+      <Row className="home-page-row-button">
+        <Button href="./products" size="lg" className="button-view-products">
+          What do you need today?
+        </Button>
+      </Row>
+      <Row className="row-image-center">
+        <img
+          className="home-page-image-size"
+          src="/home-page-image.svg"
+          alt="HomePageImage"
+        />
+      </Row>
     </div>
   );
 };

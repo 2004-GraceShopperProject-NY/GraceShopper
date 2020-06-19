@@ -11,8 +11,14 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
     <Navbar className="navbar-style" expand="lg">
       {isLoggedIn ? (
         <div>
+          <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/cart">
+            {' '}
+            <RiShoppingCartLine size={32} color="black" />
+          </Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
@@ -21,7 +27,7 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
         <div className="navbar-text">
           {/* The navbar will show these links before you log in */}
           <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
           <Link to="/cart">
             {' '}
@@ -32,7 +38,6 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
         </div>
       )}
     </Navbar>
-    <hr />
   </div>
 );
 

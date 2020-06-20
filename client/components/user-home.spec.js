@@ -1,22 +1,27 @@
 /* global describe beforeEach it */
 
-import {expect} from 'chai'
-import React from 'react'
-import enzyme, {shallow} from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import {UserHome} from './user-home'
+import {expect} from 'chai';
+import React from 'react';
+import enzyme, {shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import {UserHome} from './user-home';
 
-const adapter = new Adapter()
-enzyme.configure({adapter})
+const adapter = new Adapter();
+enzyme.configure({adapter});
 
 describe('UserHome', () => {
-  let userHome
+  it('renders <UserHome /> component', () => {
+    const wrapper = shallow(<UserHome />);
+    expect(wrapper.find('h3')).to.have.length(1);
+  });
 
-  beforeEach(() => {
-    userHome = shallow(<UserHome email="cody@email.com" />)
-  })
+  it('should have an image', function() {
+    const wrapper = shallow(<UserHome />);
+    expect(wrapper.find('img')).to.have.length(1);
+  });
 
-  it('renders the email in an h3', () => {
-    expect(userHome.find('h3').text()).to.be.equal('Welcome, cody@email.com')
-  })
-})
+  it('should have a bootstrap button', function() {
+    const wrapper = shallow(<UserHome />);
+    expect(wrapper.find('Button')).to.have.length(1);
+  });
+});

@@ -9,6 +9,11 @@ import {RiShoppingCartLine} from 'react-icons/ri';
 const MainNavbar = ({handleClick, isLoggedIn}) => (
   <div>
     <Navbar className="navbar-style" expand="lg">
+      <img
+        className="navbar-image"
+        src="/women-shopping-cart.svg"
+        alt="WomenShoppingCard"
+      />
       {isLoggedIn ? (
         <div>
           <h1 className="website-name">PANDEMIC ESSENTIALS</h1>

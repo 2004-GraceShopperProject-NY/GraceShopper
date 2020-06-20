@@ -6,7 +6,7 @@ import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {addToCartThunk} from '../store/guestCart';
 
-class SingleProduct extends Component {
+export class SingleProduct extends Component {
   constructor() {
     super();
     this.state = {

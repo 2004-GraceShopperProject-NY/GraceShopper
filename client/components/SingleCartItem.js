@@ -13,7 +13,9 @@ class SingleCartItem extends Component {
 
   handleQuantityChange = (event, productId) => {
     const quantity = parseInt(event.target.value, 10);
-    this.props.updateQuantity(productId, quantity);
+    quantity > 0
+      ? this.props.updateQuantity(productId, quantity)
+      : this.props.removeFromCart(productId);
   };
 
   render() {

@@ -82,8 +82,9 @@ describe('Order model', () => {
             productId: 1
           }
         });
-
+        console.log(item);
         expect(item[0].quantity).to.be.equal(5);
+        expect(item[0].productId).to.be.equal(1);
       });
     });
   });

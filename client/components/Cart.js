@@ -5,6 +5,7 @@ import SingleCartItem from './SingleCartItem';
 import {fetchProducts} from '../store/products';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Button} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 class Cart extends Component {
   constructor() {
@@ -46,9 +47,11 @@ class Cart extends Component {
                 quantity={cart[id]}
               />
             ))}
-            <Button size="lg" className="button-checkout">
-              Checkout
-            </Button>
+            <Link to="/checkout">
+              <Button size="lg" className="button-checkout">
+                Checkout
+              </Button>
+            </Link>
           </div>
         )}
       </div>

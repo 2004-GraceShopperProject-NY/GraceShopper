@@ -4,7 +4,7 @@ import {getSingleProduct} from '../store/products';
 import {Col, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {addToCartThunk} from '../store/cart';
+import {addToCartThunk} from '../store/guestCart';
 
 class SingleProduct extends Component {
   constructor() {

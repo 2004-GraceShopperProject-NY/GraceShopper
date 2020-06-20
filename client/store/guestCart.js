@@ -77,7 +77,6 @@ export default function cartReducer(cart = {}, action) {
     case UPDATE_QUANTITY: {
       const productId = action.productId;
       const quantity = action.quantity;
-      console.log('quantity', quantity);
       return {...cart, [productId]: quantity};
     }
     default:

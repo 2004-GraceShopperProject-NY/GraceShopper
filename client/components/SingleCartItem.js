@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Col, Button} from 'reactstrap';
-import {updateQuantityThunk} from '../store/cart';
+import {updateQuantityThunk} from '../store/guestCart';
 
 class SingleCartItem extends Component {
   constructor() {
@@ -12,8 +12,6 @@ class SingleCartItem extends Component {
   }
 
   handleQuantityChange = (event, productId) => {
-    console.log('id from handle chnage', productId);
-    console.log('value from handle change', event.target.value);
     const quantity = parseInt(event.target.value, 10);
     this.props.updateQuantity(productId, quantity);
   };
@@ -55,7 +53,7 @@ class SingleCartItem extends Component {
 
             <Button
               className="button-remove-from-cart"
-              onClick={() => this.addToCart()}
+              onClick={() => this.removeFromCart()}
             >
               Remove from <RiShoppingCartLine size={20} color="black" />
             </Button>

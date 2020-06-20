@@ -5,7 +5,6 @@ import productsReducer, {
   fetchProducts,
   getSingleProduct
 } from './products';
-// import productsReducer from './products';
 import {createStore, applyMiddleware} from 'redux';
 import enforceImmutableState from 'redux-immutable-state-invariant';
 import MockAxiosAdapter from 'axios-mock-adapter';
@@ -158,7 +157,7 @@ describe('GET /products', () => {
     mockAxios.onGet('/products');
   });
 
-  it('sets the received products on state', async () => {
+  it('sets the received products to allProducts on state', async () => {
     await store.dispatch(fetchProducts());
     const state = store.getState();
     expect(state.allProducts).to.deep.equal([
@@ -184,30 +183,39 @@ describe('GET /products', () => {
   });
 });
 
-describe('GET /products/productId', productId => {
+describe('GET /products/productId', () => {
   beforeEach(() => {
     mockAxios = new MockAxiosAdapter(axios);
-    mockAxios.onGet(`/api/products/${productId}`).reply(200, {
-      id: 2,
-      name: 'Mask',
-      price: 2000,
-      quantity: 100
+    mockAxios.onGet(`/api/products/1`).reply(200, {
+      id: 1,
+      name: 'Toilet Paper',
+      quantity: 100,
+      price: 1500,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/9133wpvx-uL._AC_SL1500_.jpg',
+      description: 'Just got real with Scott ComfortPlus Toilet paper',
+      createdAt: '2020-06-20T05:33:38.591Z',
+      updatedAt: '2020-06-20T05:33:38.591Z'
     });
     store = createStore(
       productsReducer,
       applyMiddleware(thunkMiddleware, enforceImmutableState())
     );
-    mockAxios.onGet('/products/2');
   });
 
-  it('sets the received products on state', async () => {
-    await store.dispatch(getSingleProduct());
+  it('getSingleProduct sets selectedProduct in the state', async () => {
+    await store.dispatch(getSingleProduct(1));
     const state = store.getState();
-    expect(state.singleProduct).to.deep.equal({
-      id: 2,
-      name: 'Mask',
-      price: 2000,
-      quantity: 100
+    expect(state.selectedProduct).to.deep.equal({
+      id: 1,
+      name: 'Toilet Paper',
+      quantity: 100,
+      price: 1500,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/9133wpvx-uL._AC_SL1500_.jpg',
+      description: 'Just got real with Scott ComfortPlus Toilet paper',
+      createdAt: '2020-06-20T05:33:38.591Z',
+      updatedAt: '2020-06-20T05:33:38.591Z'
     });
   });
 });

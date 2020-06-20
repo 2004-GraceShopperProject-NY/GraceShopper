@@ -17,7 +17,7 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
           <Link to="/products">Products</Link>
           <Link to="/cart">
             {' '}
-            <RiShoppingCartLine size={32} color="black" />
+            <RiShoppingCartLine color="darkcyan" size={38} />
           </Link>
           <a href="#" onClick={handleClick}>
             Logout
@@ -31,7 +31,7 @@ const MainNavbar = ({handleClick, isLoggedIn}) => (
           <Link to="/products">Products</Link>
           <Link to="/cart">
             {' '}
-            <RiShoppingCartLine size={32} color="black" />
+            <RiShoppingCartLine color="darkcyan" size={38} />
           </Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>

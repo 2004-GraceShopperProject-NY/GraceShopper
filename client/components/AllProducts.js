@@ -5,11 +5,20 @@ import {Link} from 'react-router-dom';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
+import {addToCartThunk} from '../store/cart';
 
 class AllProducts extends Component {
+  constructor() {
+    super();
+    this.addToCart = this.addToCart.bind(this);
+  }
   componentDidMount() {
     this.props.allProducts();
   }
+
+  addToCart = product => {
+    this.props.addToCartThunk(product);
+  };
 
   render() {
     const {products} = this.props;
@@ -25,22 +34,15 @@ class AllProducts extends Component {
               </Link>
               <h6>{product.name}</h6>
               <h6>Price: {priceToDollar(product.price)}</h6>
-              <Button className="button-add-to-cart">
+              <Button
+                className="button-add-to-cart"
+                onClick={() => this.addToCart(product)}
+              >
                 Add to <RiShoppingCartLine size={20} color="black" />
               </Button>
             </div>
           ))}
         </div>
-        <h2>Viewing All Products: </h2>
-        {products.map(product => (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <img src={product.imageUrl} height="200px" />
-            </Link>
-            <h6>{product.name}</h6>
-            <h6>Price: {priceToDollar(product.price)}</h6>
-          </div>
-        ))}
       </div>
     );
   }
@@ -54,7 +56,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    allProducts: () => dispatch(fetchProducts())
+    allProducts: () => dispatch(fetchProducts()),
+    addToCartThunk: product => dispatch(addToCartThunk(product))
   };
 };
 

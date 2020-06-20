@@ -25,7 +25,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log('cart from redux in Cart component', this.props.cart);
     const {cart, products} = this.props;
     return (
       <div>
@@ -66,7 +65,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // addToCartThunk: () => dispatch(addToCartThunk()),
     getCartThunk: () => dispatch(getCartThunk()),
     allProducts: () => dispatch(fetchProducts())
   };

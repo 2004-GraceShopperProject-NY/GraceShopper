@@ -1,6 +1,7 @@
 //ACTION TYPES
 const UPDATE_QUANTITY = 'CHANGE_QUANTITY';
 const GET_CART_ITEMS = 'GET_CART_ITEMS';
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 //ACTION CREATORS
 
@@ -16,6 +17,13 @@ export const getCartItems = cart => {
   return {
     type: GET_CART_ITEMS,
     cart
+  };
+};
+
+export const removedItem = productId => {
+  return {
+    type: REMOVE_FROM_CART,
+    productId
   };
 };
 
@@ -58,14 +66,25 @@ export const getCartThunk = () => {
 export const updateQuantityThunk = (productId, quantity) => {
   return dispatch => {
     try {
-      let cart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : {};
+      let cart = JSON.parse(localStorage.getItem('cart'));
       cart = {...cart, [productId]: quantity};
       localStorage.setItem('cart', JSON.stringify(cart));
       dispatch(updatedQuantity(productId, quantity));
     } catch (error) {
       console.log('Error updating quantity: ', error);
+    }
+  };
+};
+
+export const removeFromCart = productId => {
+  return dispatch => {
+    try {
+      let cart = JSON.parse(localStorage.getItem('cart'));
+      delete cart[productId];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      dispatch(removedItem(productId));
+    } catch (error) {
+      console.log('Error removing item from cart: ', error);
     }
   };
 };
@@ -78,6 +97,11 @@ export default function cartReducer(cart = {}, action) {
       const productId = action.productId;
       const quantity = action.quantity;
       return {...cart, [productId]: quantity};
+    }
+    case REMOVE_FROM_CART: {
+      let updatedCart = {...cart};
+      delete updatedCart[action.productId];
+      return updatedCart;
     }
     default:
       return cart;

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Col, Button} from 'reactstrap';
-import {updateQuantityThunk} from '../store/guestCart';
+import {updateQuantityThunk, removeFromCart} from '../store/guestCart';
 
 class SingleCartItem extends Component {
   constructor() {
@@ -18,18 +18,17 @@ class SingleCartItem extends Component {
 
   render() {
     const {product, quantity} = this.props;
-    const {id} = product;
-    console.log(product);
+    const {id, name, imageUrl, price, description} = product;
     return (
       <div>
-        <h2 className="title-single-product">{product.name}</h2>
+        <h2 className="title-single-product">{name}</h2>
         <div className="single-view-item">
           <Col>
-            <img src={product.imageUrl} height="200px" />
+            <img src={imageUrl} height="200px" />
           </Col>
           <Col>
             <div className="item-total-price">
-              Total Price: {priceToDollar(product.price * quantity)}
+              Total Price: {priceToDollar(price * quantity)}
             </div>
             <div>
               Quantity:{' '}
@@ -47,13 +46,13 @@ class SingleCartItem extends Component {
                 }}
               />
             </div>
-            <div>Item Price: {priceToDollar(product.price)}</div>
+            <div>Item Price: {priceToDollar(price)}</div>
             <div>Description:</div>
-            <div>{product.description}</div>
+            <div>{description}</div>
 
             <Button
               className="button-remove-from-cart"
-              onClick={() => this.removeFromCart()}
+              onClick={() => this.props.removeFromCart(id)}
             >
               Remove from <RiShoppingCartLine size={20} color="black" />
             </Button>
@@ -64,23 +63,11 @@ class SingleCartItem extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     cart: state.products.cart,
-//   };
-// };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     cart: state.cart,
-//     products: state.products.allProducts,
-//   };
-// };
-
 const mapDispatchToProps = dispatch => {
   return {
     updateQuantity: (productId, quantity) =>
-      dispatch(updateQuantityThunk(productId, quantity))
+      dispatch(updateQuantityThunk(productId, quantity)),
+    removeFromCart: productId => dispatch(removeFromCart(productId))
   };
 };
 

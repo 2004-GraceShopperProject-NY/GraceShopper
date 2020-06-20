@@ -1,57 +1,75 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
-import {Navbar} from 'react-bootstrap';
+import {Navbar, Row} from 'react-bootstrap';
 import {RiShoppingCartLine} from 'react-icons/ri';
+import {getCartThunk} from '../store/guestCart';
 
-const MainNavbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <Navbar className="navbar-style" expand="lg">
-      <img
-        className="navbar-image"
-        src="/women-shopping-cart.svg"
-        alt="WomenShoppingCard"
-      />
-      {isLoggedIn ? (
-        <div>
-          <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/cart">
-            {' '}
-            <RiShoppingCartLine color="darkcyan" size={38} />
-          </Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div className="navbar-text">
-          {/* The navbar will show these links before you log in */}
-          <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
-          <Link to="/">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/cart">
-            {' '}
-            <RiShoppingCartLine color="darkcyan" size={38} />
-          </Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </Navbar>
-  </div>
-);
+class MainNavbar extends Component {
+  componentWillMount() {
+    this.props.getCartThunk();
+  }
+
+  render() {
+    return (
+      <div>
+        <Navbar className="navbar-style" expand="lg">
+          <img
+            className="navbar-image"
+            src="/women-shopping-cart.svg"
+            alt="WomenShoppingCard"
+          />
+          {this.props.isLoggedIn ? (
+            <div>
+              <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
+              {/* The navbar will show these links after you log in */}
+              <Row className="navbar-row">
+                <Link to="/home">Home</Link>
+                <Link to="/products">Products</Link>
+                <Link className="cart-navbar-link" to="/cart">
+                  {' '}
+                  <RiShoppingCartLine color="darkcyan" size={38} />
+                  <p className="qty">{this.props.cartQuantity}</p>
+                </Link>
+                <a href="#" onClick={this.props.handleClick}>
+                  Logout
+                </a>
+              </Row>
+            </div>
+          ) : (
+            <div className="navbar-text">
+              {/* The navbar will show these links before you log in */}
+              <h1 className="website-name">PANDEMIC ESSENTIALS</h1>
+              <Row className="navbar-row">
+                <Link to="/">Home</Link>
+                <Link to="/products">Products</Link>
+                <Link className="cart-navbar-link" to="/cart">
+                  {' '}
+                  <RiShoppingCartLine color="darkcyan" size={38} />
+                  <div className="qty">{this.props.cartQuantity}</div>
+                </Link>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Sign Up</Link>
+              </Row>
+            </div>
+          )}
+        </Navbar>
+      </div>
+    );
+  }
+}
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapStateToProps = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cartQuantity: Object.values(state.cart).reduce((acc, qty) => {
+      return acc + qty;
+    }, 0)
   };
 };
 
@@ -59,16 +77,11 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
+    },
+    getCartThunk() {
+      dispatch(getCartThunk());
     }
   };
 };
 
-export default connect(mapState, mapDispatch)(MainNavbar);
-
-/**
- * PROP TYPES
- */
-MainNavbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-};
+export default connect(mapStateToProps, mapDispatch)(MainNavbar);

@@ -243,3 +243,29 @@ form div {
 .navbar-image {
   height: 100px;
 }
+
+.qty {
+  font-size: 12px;
+  height: 27px;
+  font-weight: bolder;
+  background-color: grey;
+  border-radius: 10px 100px / 120px;
+  padding: 5px;
+  color: white;
+}
+
+.navbar-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.cart-navbar-link {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-checkout-row {
+  display: flex;
+  justify-content: center;
+}

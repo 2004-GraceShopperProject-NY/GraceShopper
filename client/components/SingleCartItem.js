@@ -3,19 +3,25 @@ import {connect} from 'react-redux';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Col, Button} from 'reactstrap';
+import {updateQuantityThunk} from '../store/cart';
 
 class SingleCartItem extends Component {
   constructor() {
     super();
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleQuantityChange = this.handleQuantityChange.bind(this);
   }
 
-  handleInputChange = event =>
-    this.setState({[event.target.name]: event.target.value});
+  handleQuantityChange = (event, productId) => {
+    console.log('id from handle chnage', productId);
+    console.log('value from handle change', event.target.value);
+    const quantity = parseInt(event.target.value, 10);
+    this.props.updateQuantity(productId, quantity);
+  };
 
   render() {
-    const {product} = this.props;
-    const {quantity} = this.props;
+    const {product, quantity} = this.props;
+    const {id} = product;
+    console.log(product);
     return (
       <div>
         <h2 className="title-single-product">{product.name}</h2>
@@ -24,20 +30,29 @@ class SingleCartItem extends Component {
             <img src={product.imageUrl} height="200px" />
           </Col>
           <Col>
-            <div>Price: {priceToDollar(product.price)}</div>
-            <div>Quantity</div>
+            <div className="item-total-price">
+              Total Price: {priceToDollar(product.price * quantity)}
+            </div>
+            <div>
+              Quantity:{' '}
+              <input
+                className="quantity"
+                type="number"
+                min="0"
+                value={quantity}
+                name="quantity"
+                onChange={() => this.handleQuantityChange(event, id)}
+                style={{
+                  width: '60px',
+                  marginRight: '10px',
+                  borderRadius: '3px'
+                }}
+              />
+            </div>
+            <div>Item Price: {priceToDollar(product.price)}</div>
             <div>Description:</div>
             <div>{product.description}</div>
-            <input
-              className="quantity"
-              type="number"
-              min="0"
-              value={quantity}
-              name="quantity"
-              onChange={this.handleInputChange}
-              // className="float-right"
-              style={{width: '60px', marginRight: '10px', borderRadius: '3px'}}
-            />
+
             <Button
               className="button-remove-from-cart"
               onClick={() => this.addToCart()}
@@ -51,10 +66,24 @@ class SingleCartItem extends Component {
   }
 }
 
-const mapStateToProps = state => {
+// const mapStateToProps = (state) => {
+//   return {
+//     cart: state.products.cart,
+//   };
+// };
+
+// const mapStateToProps = (state) => {
+//   return {
+//     cart: state.cart,
+//     products: state.products.allProducts,
+//   };
+// };
+
+const mapDispatchToProps = dispatch => {
   return {
-    cart: state.products.cart
+    updateQuantity: (productId, quantity) =>
+      dispatch(updateQuantityThunk(productId, quantity))
   };
 };
 
-export default connect(mapStateToProps, null)(SingleCartItem);
+export default connect(null, mapDispatchToProps)(SingleCartItem);

@@ -39,7 +39,7 @@ export const addToCartThunk = (product, quantity) => {
         : {};
       let productId = product.id;
       cart[productId] = cart[productId] ? cart[productId] : 0;
-      let qty = parseInt(cart[productId]) + parseInt(quantity);
+      let qty = parseInt(cart[productId], 10) + parseInt(quantity, 10);
       if (product.quantity < qty) {
         cart[productId] = product.quantity;
       } else {
@@ -96,11 +96,8 @@ export default function cartReducer(cart = {}, action) {
   switch (action.type) {
     case GET_CART_ITEMS:
       return action.cart;
-    case UPDATE_QUANTITY: {
-      const productId = action.productId;
-      const quantity = action.quantity;
-      return {...cart, [productId]: quantity};
-    }
+    case UPDATE_QUANTITY:
+      return {...cart, [action.productId]: action.quantity};
     case REMOVE_FROM_CART: {
       let updatedCart = {...cart};
       delete updatedCart[action.productId];

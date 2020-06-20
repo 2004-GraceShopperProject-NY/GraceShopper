@@ -14,7 +14,9 @@ class SingleCartItem extends Component {
   handleQuantityChange = (event, productId) => {
     let quantity = parseInt(event.target.value, 10);
     quantity = quantity ? quantity : 0;
-    if (quantity <= this.props.product.quantity) {
+    if (quantity <= 0) {
+      this.props.removeFromCart(productId)
+    } else if (quantity <= this.props.product.quantity) {
       this.props.updateQuantity(productId, quantity);
     } else {
       alert('limit is reached');

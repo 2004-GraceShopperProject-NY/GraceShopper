@@ -4,7 +4,7 @@ import {getCartThunk} from '../store/guestCart';
 import SingleCartItem from './SingleCartItem';
 import {fetchProducts} from '../store/products';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {Button} from 'reactstrap';
+import {Button, Row} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 class Cart extends Component {
@@ -48,9 +48,11 @@ class Cart extends Component {
               />
             ))}
             <Link to="/checkout">
-              <Button size="lg" className="button-checkout">
-                Checkout
-              </Button>
+              <Row className="button-checkout-row">
+                <Button size="lg" className="button-checkout">
+                  Checkout
+                </Button>
+              </Row>
             </Link>
           </div>
         )}

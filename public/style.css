@@ -43,6 +43,11 @@ label {
   font-size: 16px;
 }
 
+.cart {
+  font-size: 16px;
+  color: black;
+}
+
 .website-name {
   size: 32px;
   letter-spacing: 5px;
@@ -199,7 +204,7 @@ form div {
 }
 
 .item-total-price {
-  color: darkcyan;
+  color: black;
 }
 
 .welcome-page-categories {

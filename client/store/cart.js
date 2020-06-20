@@ -1,3 +1,5 @@
+import Axios from 'axios';
+
 //ACTION TYPES
 const ADD_QUANTITY = 'ADD_QUANTITY';
 const SUB_QUANTITY = 'SUB_QUANTITY';
@@ -26,22 +28,31 @@ export const getCartItems = cart => {
 };
 
 //THUNK
-export const addToCartThunk = product => {
-  return dispatch => {
+export const addToCartThunk = (product, quantity) => {
+  return async (dispatch, getState) => {
     try {
-      let cart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : {};
-      let productId = product.id;
-      cart[productId] = cart[productId] ? cart[productId] : 0;
-      let qty = parseInt(cart[productId]) + parseInt(1);
-      if (product.available_quantity < qty) {
-        cart[productId] = product.available_quantity;
+      let userId = getState().user.id;
+      if (!userId) {
+        let cart = localStorage.getItem('cart')
+          ? JSON.parse(localStorage.getItem('cart'))
+          : {};
+        let productId = product.id;
+        cart[productId] = cart[productId] ? cart[productId] : 0;
+        let qty = parseInt(cart[productId]) + parseInt(1);
+        if (product.available_quantity < qty) {
+          cart[productId] = product.available_quantity;
+        } else {
+          cart[productId] = qty;
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        dispatch(getCartItems(cart));
       } else {
-        cart[productId] = qty;
+        const addProductToCart = await Axios.post('/api/cart', {
+          product,
+          quantity
+        });
+        dispatch(getCartItems(addProductToCart));
       }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      dispatch(getCartItems(cart));
     } catch (error) {
       console.log(error);
     }

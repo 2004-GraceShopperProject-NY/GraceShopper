@@ -52,24 +52,24 @@ Order.addOrCreateOrder = async function(userId) {
 };
 
 // add item to that order#
-Order.prototype.addItemToOrder = async function(productId, orderId) {
+Order.prototype.addItemToOrder = async function(productId, quantity) {
   const item = await SelectedItem.findOne({
     where: {
       productId,
-      orderId
+      orderId: this.id
     }
   });
   if (item) {
-    await item.update({quantity: item.quantity + 1});
+    return item.update({quantity: item.quantity + quantity});
   } else {
     const product = await Product.findByPk(productId);
-    await SelectedItem.create({
+    return SelectedItem.create({
       productId,
-      orderId,
-      price: product.price
+      orderId: this.id,
+      price: product.price,
+      quantity
     });
   }
-  return item;
 };
 
 module.exports = Order;

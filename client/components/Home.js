@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Row, Link, Button} from 'reactstrap';
+import {Row, Button} from 'reactstrap';
 
 const HomePage = () => {
   return (

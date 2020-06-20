@@ -2,17 +2,36 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+nav a {
+  color: grey;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin: 1em;
+}
+
+.navbar-light .navbar-text a {
+  color: grey;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  letter-spacing: 2px;
+}
+
+.navbar-light .navbar-text a:hover {
+  color: yellow;
+  text-decoration: none;
+}
+
 a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: yellow;
   text-decoration: none;
 }
 
 label {
   display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
 }
 
 .navbar-style {
@@ -26,6 +45,7 @@ nav a {
 
 .website-name {
   size: 32px;
+  letter-spacing: 5px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -187,4 +207,23 @@ form div {
 
 .row-image-center {
   align-self: center;
+}
+
+.welcome-user {
+  margin: 20px;
+  size: 32px;
+  color: darkcyan;
+  align-self: center;
+  letter-spacing: 5px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.button-view-products-user {
+  background-color: #afeeee;
+  color: grey;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  letter-spacing: 3px;
+  font-weight: bolder;
+  box-shadow: 0 10px 15px 9px rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

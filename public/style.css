@@ -171,9 +171,11 @@ form div {
   border: 4px solid #afeeee;
 }
 
-.title-home-page {
+.title-home-page,
+.confirmation-home-page,
+.confirmation-home-page2 {
   size: 32px;
-  padding: 20px;
+  padding: 10px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -204,17 +206,32 @@ form div {
 .home-page-image-size {
   width: 500px;
   height: 500px;
+  align-self: center;
 }
 
-.home-page-view {
+.confirmation-page-image-size {
+  width: 500px;
+  height: 500px;
+  align-self: center;
+  margin-top: 30px;
+}
+
+.home-page-view,
+.confirmation-page-view {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   flex-direction: column;
 }
 
-.home-page-row-button {
+.home-page-row-button,
+.confirmation-page-row-button {
   align-self: center;
+}
+
+.confirmation-home-page2 {
+  align-self: center;
+  font-style: italic;
 }
 
 .row-image-center {
@@ -236,6 +253,16 @@ form div {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   letter-spacing: 3px;
   font-weight: bolder;
+  box-shadow: 0 10px 15px 9px rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button-start-new-order {
+  background-color: yellow;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  letter-spacing: 3px;
+
   box-shadow: 0 10px 15px 9px rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

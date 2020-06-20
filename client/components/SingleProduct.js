@@ -24,11 +24,10 @@ export class SingleProduct extends Component {
     this.setState({[event.target.name]: event.target.value});
 
   addToCart = () => {
-    // console.log('we are in addToCart', this.props.product);
     this.props.addToCartThunk(this.props.product, this.state.quantity);
-    this.setState = {
+    this.setState({
       quantity: 1
-    };
+    });
   };
 
   render() {
@@ -70,7 +69,7 @@ export class SingleProduct extends Component {
 const mapStateToProps = state => {
   return {
     product: state.products.selectedProduct,
-    cart: state.cart.cart
+    cart: state.cart
   };
 };
 

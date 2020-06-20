@@ -1,3 +1,5 @@
+import Axios from 'axios';
+
 //ACTION TYPES
 const UPDATE_QUANTITY = 'CHANGE_QUANTITY';
 const GET_CART_ITEMS = 'GET_CART_ITEMS';
@@ -28,7 +30,8 @@ export const removedItem = productId => {
 };
 
 //THUNK
-export const addToCartThunk = product => {
+export const addToCartThunk = (product, quantity) => {
+  console.log(quantity, typeof quantity);
   return dispatch => {
     try {
       let cart = localStorage.getItem('cart')
@@ -36,7 +39,7 @@ export const addToCartThunk = product => {
         : {};
       let productId = product.id;
       cart[productId] = cart[productId] ? cart[productId] : 0;
-      let qty = parseInt(cart[productId], 10) + 1;
+      let qty = parseInt(cart[productId]) + parseInt(quantity);
       if (product.quantity < qty) {
         cart[productId] = product.quantity;
       } else {

@@ -18,7 +18,7 @@ const Order = db.define('order', {
   }
 });
 
-const createConfirmationNumber = () => {
+Order.createConfirmationNumber = () => {
   function getRandomizer(bottom, top) {
     return function() {
       return Math.floor(Math.random() * (1 + top - bottom)) + bottom;
@@ -43,9 +43,9 @@ Order.addOrCreateOrder = async function(userId) {
     return order;
   } else {
     const user = await User.findByPk(userId);
-    const newOrder = await Order.create({
-      confirmationNum: createConfirmationNumber()
-    });
+    const newOrder = await Order.create();
+    newOrder.confirmationNum = Order.createConfirmationNumber();
+    await newOrder.save();
     await user.addOrder(newOrder);
     return newOrder;
   }
@@ -53,6 +53,7 @@ Order.addOrCreateOrder = async function(userId) {
 
 // add item to that order#
 Order.prototype.addItemToOrder = async function(productId, quantity) {
+  //gues would not have an item in selectedItem
   const item = await SelectedItem.findOne({
     where: {
       productId,
@@ -62,6 +63,7 @@ Order.prototype.addItemToOrder = async function(productId, quantity) {
   if (item) {
     return item.update({quantity: item.quantity + quantity});
   } else {
+    //guest goes here
     const product = await Product.findByPk(productId);
     return SelectedItem.create({
       productId,

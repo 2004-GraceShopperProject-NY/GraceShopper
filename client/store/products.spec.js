@@ -1,6 +1,11 @@
 import {expect} from 'chai';
-import {allProducts, singleProduct, fetchProducts} from './products';
-import productsReducer from './products';
+import productsReducer, {
+  allProducts,
+  singleProduct,
+  fetchProducts,
+  getSingleProduct
+} from './products';
+// import productsReducer from './products';
 import {createStore, applyMiddleware} from 'redux';
 import enforceImmutableState from 'redux-immutable-state-invariant';
 import MockAxiosAdapter from 'axios-mock-adapter';
@@ -156,7 +161,6 @@ describe('GET /products', () => {
   it('sets the received products on state', async () => {
     await store.dispatch(fetchProducts());
     const state = store.getState();
-    console.log(state);
     expect(state.allProducts).to.deep.equal([
       {
         id: 2,
@@ -177,5 +181,33 @@ describe('GET /products', () => {
         quantity: 50
       }
     ]);
+  });
+});
+
+describe('GET /products/productId', productId => {
+  beforeEach(() => {
+    mockAxios = new MockAxiosAdapter(axios);
+    mockAxios.onGet(`/api/products/${productId}`).reply(200, {
+      id: 2,
+      name: 'Mask',
+      price: 2000,
+      quantity: 100
+    });
+    store = createStore(
+      productsReducer,
+      applyMiddleware(thunkMiddleware, enforceImmutableState())
+    );
+    mockAxios.onGet('/products/2');
+  });
+
+  it('sets the received products on state', async () => {
+    await store.dispatch(getSingleProduct());
+    const state = store.getState();
+    expect(state.singleProduct).to.deep.equal({
+      id: 2,
+      name: 'Mask',
+      price: 2000,
+      quantity: 100
+    });
   });
 });

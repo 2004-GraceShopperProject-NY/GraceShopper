@@ -21,7 +21,6 @@ class SingleProduct extends Component {
     this.setState({[event.target.name]: event.target.value});
 
   addToCart = () => {
-    console.log('we are in addToCart', this.props.product);
     this.props.addToCartThunk(this.props.product);
   };
 

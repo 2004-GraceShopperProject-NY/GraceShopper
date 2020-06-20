@@ -9,6 +9,9 @@ import {addToCartThunk} from '../store/guestCart';
 class SingleProduct extends Component {
   constructor() {
     super();
+    this.state = {
+      quantity: 1
+    };
     this.addToCart = this.addToCart.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -21,7 +24,8 @@ class SingleProduct extends Component {
     this.setState({[event.target.name]: event.target.value});
 
   addToCart = () => {
-    this.props.addToCartThunk(this.props.product);
+    // console.log('we are in addToCart', this.props.product);
+    this.props.addToCartThunk(this.props.product, this.state.quantity);
   };
 
   render() {
@@ -41,7 +45,7 @@ class SingleProduct extends Component {
             <div>Quantity</div>
             <input
               type="number"
-              value={1}
+              value={this.state.quantity}
               name="quantity"
               onChange={this.handleInputChange}
               className="float-right"
@@ -63,14 +67,15 @@ class SingleProduct extends Component {
 const mapStateToProps = state => {
   return {
     product: state.products.selectedProduct,
-    cart: state.products.cart
+    cart: state.cart.cart
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getSingleProduct: productId => dispatch(getSingleProduct(productId)),
-    addToCartThunk: product => dispatch(addToCartThunk(product))
+    addToCartThunk: (product, quantity) =>
+      dispatch(addToCartThunk(product, quantity))
   };
 };
 

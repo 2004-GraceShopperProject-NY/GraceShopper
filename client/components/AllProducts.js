@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
-import {addToCartThunk} from '../store/cart';
+import {addToCartThunk} from '../store/guestCart';
 
 class AllProducts extends Component {
   constructor() {

@@ -1,71 +1,49 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import CheckoutCartList from './CheckoutCartList';
+import {checkOutCart} from '../store/checkoutCart';
 
 class CheckoutPayment extends Component {
+  constructor() {
+    super();
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      address: '',
+      address2: '',
+      zip: '',
+      nameOnCard: '',
+      expiration: '',
+      creditCardNumber: ''
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.checkoutCart();
+  }
+
   render() {
+    const {cart} = this.props;
+
     return (
       <div className="container">
         <div className="py-5 text-center">
-          <img
-            className="d-block mx-auto mb-4"
-            src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg"
-            alt=""
-            width="72"
-            height="72"
-          />
           <h2>Checkout</h2>
           <p className="lead">Please review and confirm your order:</p>
         </div>
         <div className="row">
           <div className="col-md-4 order-md-2 mb-4">
-            <h4 className="d-flex justify-content-between align-items-center mb-3">
-              <span className="text-muted">Your cart</span>
-              <span className="badge badge-secondary badge-pill">3</span>
-            </h4>
-            <ul className="list-group mb-3 sticky-top">
-              <li className="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 className="my-0">Product name</h6>
-                  <small className="text-muted">Brief description</small>
-                </div>
-                <span className="text-muted">$12</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 className="my-0">Second product</h6>
-                  <small className="text-muted">Brief description</small>
-                </div>
-                <span className="text-muted">$8</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 className="my-0">Third item</h6>
-                  <small className="text-muted">Brief description</small>
-                </div>
-                <span className="text-muted">$5</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between bg-light">
-                {/* <div className="text-success">
-                        <h6 className="my-0">Promo code</h6>
-                        <small>EXAMPLECODE</small>
-                    </div>
-                    <span className="text-success">-$5</span> */}
-              </li>
-              <li className="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
-                <strong>$20</strong>
-              </li>
-            </ul>
-            {/* <form className="card p-2">
-                <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Promo code"/>
-                    <div className="input-group-append">
-                        <button type="submit" className="btn btn-secondary">Redeem</button>
-                    </div>
-                </div>
-            </form> */}
+            <CheckoutCartList cart={cart} />
           </div>
+
           <div className="col-md-8 order-md-1">
             <h4 className="mb-3">Billing address</h4>
             <form className="needs-validation" noValidate="">
@@ -74,10 +52,13 @@ class CheckoutPayment extends Component {
                   <label htmlFor="firstName">First name</label>
                   <input
                     type="text"
+                    name="firstName"
                     className="form-control"
                     id="firstName"
                     placeholder=""
                     required=""
+                    value={this.state.firstName}
+                    onChange={this.handleInputChange}
                   />
                   <div className="invalid-feedback">
                     {' '}
@@ -88,10 +69,13 @@ class CheckoutPayment extends Component {
                   <label htmlFor="lastName">Last name</label>
                   <input
                     type="text"
+                    name="lastName"
                     className="form-control"
                     id="lastName"
                     placeholder=""
                     required=""
+                    value={this.state.lastName}
+                    onChange={this.handleInputChange}
                   />
                   <div className="invalid-feedback">
                     {' '}
@@ -106,9 +90,12 @@ class CheckoutPayment extends Component {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   className="form-control"
                   id="email"
                   placeholder="you@example.com"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
                 />
                 <div className="invalid-feedback">
                   {' '}
@@ -119,10 +106,13 @@ class CheckoutPayment extends Component {
                 <label htmlFor="address">Address</label>
                 <input
                   type="text"
+                  name="address"
                   className="form-control"
                   id="address"
                   placeholder="1234 Main St"
                   required=""
+                  value={this.state.address}
+                  onChange={this.handleInputChange}
                 />
                 <div className="invalid-feedback">
                   {' '}
@@ -135,9 +125,12 @@ class CheckoutPayment extends Component {
                 </label>
                 <input
                   type="text"
+                  name="address2"
                   className="form-control"
                   id="address2"
                   placeholder="Apartment or suite"
+                  value={this.state.address2}
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div className="row">
@@ -146,6 +139,7 @@ class CheckoutPayment extends Component {
                   <select
                     className="custom-select d-block w-100"
                     id="country"
+                    name="country"
                     required=""
                   >
                     <option value="">Choose...</option>
@@ -161,6 +155,7 @@ class CheckoutPayment extends Component {
                   <select
                     className="custom-select d-block w-100"
                     id="state"
+                    name="state"
                     required=""
                   >
                     <option>Choose...</option>
@@ -176,73 +171,30 @@ class CheckoutPayment extends Component {
                   <label htmlFor="zip">Zip</label>
                   <input
                     type="text"
+                    name="zip"
                     className="form-control"
                     id="zip"
                     placeholder=""
                     required=""
+                    value={this.state.zip}
+                    onChange={this.handleInputChange}
                   />
                   <div className="invalid-feedback"> Zip code required. </div>
                 </div>
               </div>
               <hr className="mb-4" />
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="same-address"
-                />
-                <label className="custom-control-label" htmlFor="same-address">
-                  Shipping address is the same as my billing address
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="save-info"
-                />
-                <label className="custom-control-label" htmlFor="save-info">
-                  Save this information for next time
-                </label>
-              </div>
-              <hr className="mb-4" />
-              <h4 className="mb-3">Payment</h4>
-              <div className="d-block my-3">
-                <div className="custom-control custom-radio">
-                  <input
-                    id="credit"
-                    name="paymentMethod"
-                    type="radio"
-                    className="custom-control-input"
-                    checked=""
-                    required=""
-                  />
-                  <label className="custom-control-label" htmlFor="credit">
-                    Credit card
-                  </label>
-                </div>
-                <div className="custom-control custom-radio">
-                  <input
-                    id="debit"
-                    name="paymentMethod"
-                    type="radio"
-                    className="custom-control-input"
-                    required=""
-                  />
-                  <label className="custom-control-label" htmlFor="debit">
-                    Debit card
-                  </label>
-                </div>
-              </div>
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <label htmlFor="cc-name">Name on card</label>
                   <input
                     type="text"
+                    name="nameOnCard"
                     className="form-control"
                     id="cc-name"
                     placeholder=""
                     required=""
+                    value={this.state.nameOnCard}
+                    onChange={this.handleInputChange}
                   />
                   <small className="text-muted">
                     Full name as displayed on card
@@ -256,10 +208,13 @@ class CheckoutPayment extends Component {
                   <label htmlFor="cc-number">Credit card number</label>
                   <input
                     type="text"
+                    name="creditCardNumber"
                     className="form-control"
                     id="cc-number"
                     placeholder=""
                     required=""
+                    value={this.state.creditCardNumber}
+                    onChange={this.handleInputChange}
                   />
                   <div className="invalid-feedback">
                     {' '}
@@ -272,10 +227,13 @@ class CheckoutPayment extends Component {
                   <label htmlFor="cc-expiration">Expiration</label>
                   <input
                     type="text"
+                    name="expiration"
                     className="form-control"
                     id="cc-expiration"
                     placeholder=""
                     required=""
+                    value={this.state.expiration}
+                    onChange={this.handleInputChange}
                   />
                   <div className="invalid-feedback">
                     {' '}
@@ -286,10 +244,13 @@ class CheckoutPayment extends Component {
                   <label htmlFor="cc-cvv">CVV</label>
                   <input
                     type="text"
+                    name="cvv"
                     className="form-control"
                     id="cc-cvv"
                     placeholder=""
                     required=""
+                    value={this.state.cvv}
+                    onChange={this.handleInputChange}
                   />
                   <div className="invalid-feedback">
                     {' '}
@@ -298,14 +259,15 @@ class CheckoutPayment extends Component {
                 </div>
               </div>
               <hr className="mb-4" />
-              <Link to="/checkout/orderConfirmation">
-                <button
-                  className="btn btn-primary btn-lg btn-block"
-                  type="submit"
-                >
-                  Continue to checkout
-                </button>
-              </Link>
+              <button
+                className="btn btn-primary btn-lg btn-block"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
+                Confirm Order
+              </button>
+
+              <br />
             </form>
           </div>
         </div>
@@ -320,4 +282,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CheckoutPayment);
+const mapDispatchToProps = dispatch => {
+  return {
+    checkoutCart: () => dispatch(checkOutCart())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPayment);

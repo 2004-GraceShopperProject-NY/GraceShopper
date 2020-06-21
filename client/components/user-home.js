@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Button} from 'reactstrap';
 
+
 /**
  * COMPONENT
  */
@@ -40,5 +41,5 @@ export default connect(mapState)(UserHome);
  * PROP TYPES
  */
 UserHome.propTypes = {
-  email: PropTypes.string
+  // email: PropTypes.string
 };

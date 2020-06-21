@@ -13,3 +13,4 @@ export {default as SingleCartItem} from './SingleCartItem';
 export {default as HomePage} from './Home';
 export {default as OrderConfirmation} from './OrderConfirmation';
 export {default as Checkout} from './Checkout';
+export {default as Footer} from './Footer';

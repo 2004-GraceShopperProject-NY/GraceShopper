@@ -26,39 +26,7 @@ export class Cart extends Component {
 
   render() {
     const {cart, products} = this.props;
-    console.log(this.props.loggedInCart);
-    return this.props.isLoggedIn ? (
-      <div>
-        {!this.props.loggedInCart[0] ? (
-          <div>
-            <h1 className="title-cart">
-              Your <RiShoppingCartLine size={20} color="black" /> is empty.
-            </h1>
-          </div>
-        ) : (
-          <div className="carts">
-            <h1 className="title-cart">
-              Your <RiShoppingCartLine size={32} color="black" />
-            </h1>
-            {this.props.loggedInCart.map(productObj => {
-              return (
-                <SingleCartItem
-                  key={productObj.id}
-                  product={productObj}
-                  quantity={productObj.quantity}
-                />
-              );
-            })}
-
-            <Link to="/checkout">
-              <Button size="lg" className="button-checkout">
-                Checkout
-              </Button>
-            </Link>
-          </div>
-        )}
-      </div>
-    ) : (
+    return (
       <div>
         {JSON.stringify(cart) === '{}' || !products.length ? (
           <div>
@@ -90,10 +58,8 @@ export class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: !!state.user.id,
     cart: state.cart,
-    products: state.products.allProducts,
-    loggedInCart: state.loggedInCart
+    products: state.products.allProducts
   };
 };
 

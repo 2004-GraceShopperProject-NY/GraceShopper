@@ -1,16 +1,15 @@
 const router = require('express').Router();
 const {Order, Product} = require('../db/models');
 
-router.post('/:productId/:quantity', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    //tech don't need req.user because only user comes to this post route
-    let product = await Product.findByPk(req.params.productId);
+    //don't need req.user because only user comes to this post route
     if (req.user) {
       const order = await Order.addOrCreateOrder(req.user.id);
       if (order) {
         const item = await order.addItemToOrder(
-          product.id,
-          +req.params.quantity
+          req.body.product.id,
+          +req.body.quantity
         );
         res.json(item);
       }

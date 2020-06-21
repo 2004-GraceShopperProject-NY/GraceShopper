@@ -5,7 +5,6 @@ import {Col, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {addToCartThunk} from '../store/guestCart';
-import {addToCartLoggedIn} from '../store/loggedInCart';
 
 export class SingleProduct extends Component {
   constructor() {
@@ -19,24 +18,21 @@ export class SingleProduct extends Component {
 
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.id);
-    console.log('loggedInCartItems', this.props.loggedInCart);
   }
 
   handleInputChange = event =>
     this.setState({[event.target.name]: event.target.value});
 
   addToCart = () => {
-    this.props.isLoggedIn
-      ? this.props.addToCartLoggedIn(this.props.product, this.state.quantity)
-      : this.props.addToCartThunk(this.props.product, this.state.quantity);
-    this.setState = {
+    this.props.addToCartThunk(this.props.product, this.state.quantity);
+    this.setState({
       quantity: 1
     });
   };
 
   render() {
     const {product} = this.props;
-    console.log('loggedInCartItems', this.props.loggedInCart);
+
     return (
       <div>
         <h2 className="title-single-product">{product.name}</h2>
@@ -72,9 +68,7 @@ export class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: !!state.user.id,
     product: state.products.selectedProduct,
-    loggedInCart: state.loggedInCart,
     cart: state.cart
   };
 };
@@ -83,9 +77,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getSingleProduct: productId => dispatch(getSingleProduct(productId)),
     addToCartThunk: (product, quantity) =>
-      dispatch(addToCartThunk(product, quantity)),
-    addToCartLoggedIn: (product, quantity) =>
-      dispatch(addToCartLoggedIn(product, quantity))
+      dispatch(addToCartThunk(product, quantity))
   };
 };
 

@@ -1,5 +1,7 @@
 const {expect} = require('chai');
+const request = require('supertest');
 const db = require('..');
+const app = require('../../index');
 const Order = db.model('order');
 const User = require('./user');
 const SelectedItem = require('./selectedItem');

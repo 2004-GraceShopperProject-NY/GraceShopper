@@ -137,11 +137,40 @@ form div {
   color: black;
 }
 
+.remove-icon {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.quantity-input {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.quantity {
+  height: 30px;
+  width: 30px;
+  border: 2px black solid;
+}
+
+.space-between-cart-item {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.quantity:hover {
+  border: 2px darkcyan solid;
+}
+
 .button-remove-from-cart {
   margin-right: 10px;
   margin-left: 10px;
   background-color: red;
   color: white;
+  margin-top: 20px;
 }
 
 .button-add-quantity {

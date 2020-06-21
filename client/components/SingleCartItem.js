@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
+import {FiDelete} from 'react-icons/fi';
 import {Col, Button} from 'reactstrap';
 import {updateQuantityThunk, removeFromCart} from '../store/guestCart';
 
@@ -15,7 +16,7 @@ class SingleCartItem extends Component {
     let quantity = parseInt(event.target.value, 10);
     quantity = quantity ? quantity : 0;
     if (quantity <= 0) {
-      this.props.removeFromCart(productId)
+      this.props.removeFromCart(productId);
     } else if (quantity <= this.props.product.quantity) {
       this.props.updateQuantity(productId, quantity);
     } else {
@@ -30,15 +31,15 @@ class SingleCartItem extends Component {
       <div>
         <h2 className="title-single-product">{name}</h2>
         <div className="single-view-item">
-          <Col>
+          <Col sm={1} className="remove-icon">
+            <FiDelete onClick={() => this.props.removeFromCart(id)} size={40} />
+          </Col>
+          <Col sm={5}>
             <img src={imageUrl} height="200px" />
           </Col>
-          <Col>
-            <div className="item-total-price">
-              Total Price: {priceToDollar(price * quantity)}
-            </div>
+          <Col sm={2} className="quantity-input">
             <div>
-              Quantity:{' '}
+              {' '}
               <input
                 className="quantity"
                 type="number"
@@ -53,16 +54,14 @@ class SingleCartItem extends Component {
                 }}
               />
             </div>
+          </Col>
+          <Col sm={4} className="space-between-cart-item">
+            <div className="item-total-price">
+              Total Price: {priceToDollar(price * quantity)}
+            </div>
             <div>Item Price: {priceToDollar(price)}</div>
             <div>Description:</div>
             <div>{description}</div>
-
-            <Button
-              className="button-remove-from-cart"
-              onClick={() => this.props.removeFromCart(id)}
-            >
-              Remove from <RiShoppingCartLine size={20} color="black" />
-            </Button>
           </Col>
         </div>
       </div>

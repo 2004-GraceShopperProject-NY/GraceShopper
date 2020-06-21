@@ -43,6 +43,11 @@ label {
   font-size: 16px;
 }
 
+.cart {
+  font-size: 16px;
+  color: black;
+}
+
 .website-name {
   size: 32px;
   letter-spacing: 5px;
@@ -88,6 +93,9 @@ form div {
   margin-left: 10px;
   background-color: #afeeee;
   color: black;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
 }
 
 .button-add-to-cart {
@@ -103,11 +111,17 @@ form div {
   margin-bottom: 50px;
   background-color: yellow;
   color: black;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
 }
 
 .button-view-products {
   background-color: #afeeee;
   color: black;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
 }
 
 .label-text-style {
@@ -144,13 +158,14 @@ form div {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: center;
 }
 
 .title-all-products {
   padding: 10px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
 }
 
@@ -171,9 +186,11 @@ form div {
   border: 4px solid #afeeee;
 }
 
-.title-home-page {
+.title-home-page,
+.confirmation-home-page,
+.confirmation-home-page2 {
   size: 32px;
-  padding: 20px;
+  padding: 10px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -187,7 +204,7 @@ form div {
 }
 
 .item-total-price {
-  color: darkcyan;
+  color: black;
 }
 
 .welcome-page-categories {
@@ -204,17 +221,32 @@ form div {
 .home-page-image-size {
   width: 500px;
   height: 500px;
+  align-self: center;
 }
 
-.home-page-view {
+.confirmation-page-image-size {
+  width: 500px;
+  height: 500px;
+  align-self: center;
+  margin-top: 30px;
+}
+
+.home-page-view,
+.confirmation-page-view {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   flex-direction: column;
 }
 
-.home-page-row-button {
+.home-page-row-button,
+.confirmation-page-row-button {
   align-self: center;
+}
+
+.confirmation-home-page2 {
+  align-self: center;
+  font-style: italic;
 }
 
 .row-image-center {
@@ -231,17 +263,31 @@ form div {
 }
 
 .button-view-products-user {
-  background-color: #afeeee;
-  color: grey;
+  background-color: yellow;
+  color: darkcyan;
+  width: 230px;
+  align-self: center;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   letter-spacing: 3px;
-  font-weight: bolder;
-  box-shadow: 0 10px 15px 9px rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-weight: lighter;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.button-start-new-order {
+  background-color: yellow;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
 }
 
 .navbar-image {
-  height: 100px;
+  height: 60px;
 }
 
 .qty {
@@ -258,6 +304,7 @@ form div {
   display: flex;
   align-items: center;
   flex-direction: row;
+  justify-content: center;
 }
 
 .cart-navbar-link {
@@ -268,4 +315,11 @@ form div {
 .button-checkout-row {
   display: flex;
   justify-content: center;
+  align-self: center;
+}
+
+.navbar-title-and-menu {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }

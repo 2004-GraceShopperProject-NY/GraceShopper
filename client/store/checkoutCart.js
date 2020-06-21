@@ -11,15 +11,19 @@ export const checkedOutCart = checkedOutInfo => {
   };
 };
 
+//TO BE EDITED!!!
 export const checkOutCart = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
-      let cart = JSON.parse(localStorage.getItem('cart'));
-      const {data} = await Axios.post('/api/cart/checkout/guest', {cart});
-      localStorage.clear();
-      dispatch(getCartItems({}));
-      dispatch(checkedOutCart(data));
-      history.push('/checkout/orderConfirmation');
+      let user = getState().user.id;
+      if (!user) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        const {data} = await Axios.post('/api/cart/checkout/guest', {cart});
+        localStorage.clear();
+        dispatch(getCartItems({}));
+        dispatch(checkedOutCart(data));
+        history.push('/checkout/orderConfirmation');
+      }
     } catch (error) {
       console.log(error);
     }

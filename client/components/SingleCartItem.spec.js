@@ -7,7 +7,7 @@ import {SingleCartItem as UnconnectedSingleCartItem} from './SingleCartItem';
 const adapter = new Adapter();
 enzyme.configure({adapter});
 
-describe.only('Single Cart Item', () => {
+describe('Single Cart Item', () => {
   describe('<SingleCartItem /> component', () => {
     const product = {
       id: 4,
@@ -44,7 +44,7 @@ describe.only('Single Cart Item', () => {
         price: '3500',
         imageUrl:
           'https://www.kroger.com/product/images/xlarge/front/0038137117210',
-        description: 'Handy dandy first aid kit - pathto improved wellness'
+        description: 'Handy dandy first aid kit - path to improved wellness'
       };
       const wrapper = shallow(
         <UnconnectedSingleCartItem

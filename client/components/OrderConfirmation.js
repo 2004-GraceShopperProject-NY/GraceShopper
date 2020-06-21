@@ -17,7 +17,7 @@ const OrderConfirmation = props => {
         May the odds be ever in your favor
       </h4>
       <div className="confirmation-page-row-button">
-        <Button className="button-start-new-order" ahref="/home" type="submit">
+        <Button className="button-start-new-order" href="/" type="submit">
           Start New Order
         </Button>
       </div>

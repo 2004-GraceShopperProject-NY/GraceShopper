@@ -3,7 +3,7 @@ const {Order, Product} = require('../db/models');
 
 router.post('/', async (req, res, next) => {
   try {
-    //tech don't need req.user because only user comes to this post route
+    //don't need req.user because only user comes to this post route
     if (req.user) {
       const order = await Order.addOrCreateOrder(req.user.id);
       if (order) {
@@ -24,9 +24,7 @@ router.post('/', async (req, res, next) => {
 router.post('/checkout/guest', async (req, res, next) => {
   try {
     //1. create order for guest, bought => true
-    const order = await Order.create({
-      bought: true
-    });
+    const order = await Order.create({bought: true});
     order.confirmationNum = Order.createConfirmationNumber();
     await order.save();
     // 2. add productId and quantity to order & create selecteditems

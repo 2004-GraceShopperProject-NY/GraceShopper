@@ -7,7 +7,7 @@ import {Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {addToCartThunk} from '../store/guestCart';
 
-class AllProducts extends Component {
+export class AllProducts extends Component {
   constructor() {
     super();
     this.state = {

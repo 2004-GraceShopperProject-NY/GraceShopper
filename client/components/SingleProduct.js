@@ -7,7 +7,7 @@ import {RiShoppingCartLine} from 'react-icons/ri';
 import {addToCartThunk} from '../store/guestCart';
 import {addToCartLoggedIn} from '../store/loggedInCart';
 
-class SingleProduct extends Component {
+export class SingleProduct extends Component {
   constructor() {
     super();
     this.state = {
@@ -31,7 +31,7 @@ class SingleProduct extends Component {
       : this.props.addToCartThunk(this.props.product, this.state.quantity);
     this.setState = {
       quantity: 1
-    };
+    });
   };
 
   render() {
@@ -74,8 +74,8 @@ const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
     product: state.products.selectedProduct,
-    cart: state.cart.cart,
-    loggedInCart: state.loggedInCart
+    loggedInCart: state.loggedInCart,
+    cart: state.cart
   };
 };
 

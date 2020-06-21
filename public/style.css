@@ -38,6 +38,67 @@ label {
   background-color: #afeeee;
 }
 
+.footer {
+  display: flex;
+  flex-direction: row;
+  background-color: #afeeee;
+  height: 100%;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.copyright {
+  margin-bottom: 10px;
+  letter-spacing: 3px;
+}
+
+.copyright-name {
+  color: black;
+  letter-spacing: 3px;
+}
+
+.copyright-name:hover {
+  color: darkcyan;
+}
+
+.github {
+  color: black;
+  letter-spacing: 3px;
+  text-decoration: underline;
+}
+
+.description {
+  margin-bottom: 10px;
+  margin-right: 30px;
+  letter-spacing: 3px;
+}
+
+.year {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  letter-spacing: 3px;
+}
+
+.footer-title {
+  size: 20px;
+  letter-spacing: 5px;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.footer-col {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.footer-col-2 {
+  display: flex;
+  justify-content: space-between;
+  align-self: right;
+  flex-direction: column;
+}
+
 .navbar-text {
   align-items: center;
   font-size: 16px;
@@ -51,7 +112,7 @@ label {
 }
 
 form div {
-  margin: 1em;
+  margin: 10px;
   display: inline-block;
 }
 
@@ -88,6 +149,9 @@ form div {
   margin-left: 10px;
   background-color: #afeeee;
   color: black;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
 }
 
 .button-add-to-cart {
@@ -101,13 +165,34 @@ form div {
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 50px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   background-color: yellow;
-  color: black;
+  font-weight: lighter;
+  width: 180px;
+  color: darkcyan;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.button-confirmation {
+  width: 180px;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-weight: lighter;
+  background-color: yellow;
+  letter-spacing: 3px;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
 }
 
 .button-view-products {
   background-color: #afeeee;
   color: black;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
 }
 
 .label-text-style {
@@ -127,7 +212,10 @@ form div {
 }
 
 .title-cart {
-  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .single-in-all-products {
@@ -144,13 +232,14 @@ form div {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: center;
 }
 
 .title-all-products {
   padding: 10px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
 }
 
@@ -171,15 +260,18 @@ form div {
   border: 4px solid #afeeee;
 }
 
-.title-home-page {
+.title-home-page,
+.confirmation-home-page,
+.confirmation-home-page2 {
   size: 32px;
-  padding: 20px;
+  padding: 10px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .container {
   max-width: 960px;
+  background-color: whitesmoke;
 }
 
 .lh-condensed {
@@ -187,7 +279,7 @@ form div {
 }
 
 .item-total-price {
-  color: darkcyan;
+  color: black;
 }
 
 .welcome-page-categories {
@@ -204,24 +296,49 @@ form div {
 .home-page-image-size {
   width: 500px;
   height: 500px;
+  align-self: center;
 }
 
-.home-page-view {
+.confirmation-page-image-size {
+  width: 500px;
+  height: 500px;
+  align-self: center;
+  margin-top: 30px;
+}
+
+.home-page-view,
+.confirmation-page-view {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   flex-direction: column;
 }
 
-.home-page-row-button {
+.home-page-row-button,
+.confirmation-page-row-button {
   align-self: center;
+}
+
+.confirmation-home-page2 {
+  align-self: center;
+  font-style: italic;
 }
 
 .row-image-center {
   align-self: center;
 }
 
-.welcome-user {
+.lead {
+  color: #6c757d;
+}
+
+.mb-3 {
+  color: #6c757d;
+  margin: 3px;
+}
+
+.welcome-user,
+.checkout-title {
   margin: 20px;
   size: 32px;
   color: darkcyan;
@@ -231,11 +348,77 @@ form div {
 }
 
 .button-view-products-user {
-  background-color: #afeeee;
-  color: grey;
+  background-color: yellow;
+  color: darkcyan;
+  width: 230px;
+  align-self: center;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   letter-spacing: 3px;
+  font-weight: lighter;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.button-start-new-order {
+  background-color: yellow;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.button-empty-card-page {
+  width: 180px;
+  margin-top: 20px;
+  background-color: yellow;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.navbar-image {
+  height: 60px;
+}
+
+.qty {
+  font-size: 12px;
+  height: 27px;
   font-weight: bolder;
-  box-shadow: 0 10px 15px 9px rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: grey;
+  border-radius: 10px 100px / 120px;
+  padding: 5px;
+  color: white;
+}
+
+.navbar-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.cart-navbar-link {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-checkout-row,
+.button-confirmation-row {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.navbar-title-and-menu {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }

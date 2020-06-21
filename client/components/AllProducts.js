@@ -7,9 +7,12 @@ import {Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {addToCartThunk} from '../store/guestCart';
 
-class AllProducts extends Component {
+export class AllProducts extends Component {
   constructor() {
     super();
+    this.state = {
+      quantity: 1
+    };
     this.addToCart = this.addToCart.bind(this);
   }
   componentDidMount() {
@@ -17,7 +20,7 @@ class AllProducts extends Component {
   }
 
   addToCart = product => {
-    this.props.addToCartThunk(product);
+    this.props.addToCartThunk(product, this.state.quantity);
   };
 
   render() {
@@ -57,7 +60,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     allProducts: () => dispatch(fetchProducts()),
-    addToCartThunk: product => dispatch(addToCartThunk(product))
+    addToCartThunk: (product, quantity) =>
+      dispatch(addToCartThunk(product, quantity))
   };
 };
 

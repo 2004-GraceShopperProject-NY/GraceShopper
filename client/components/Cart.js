@@ -4,10 +4,9 @@ import {getCartThunk} from '../store/guestCart';
 import SingleCartItem from './SingleCartItem';
 import {fetchProducts} from '../store/products';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {Button} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import {Button, Row} from 'reactstrap';
 
-class Cart extends Component {
+export class Cart extends Component {
   constructor() {
     super();
     this.findProduct = this.findProduct.bind(this);
@@ -64,14 +63,12 @@ class Cart extends Component {
         {JSON.stringify(cart) === '{}' || !products.length ? (
           <div>
             <h1 className="title-cart">
-              Your <RiShoppingCartLine size={20} color="black" /> is empty.
+              <RiShoppingCartLine size={200} color="darkcyan" />{' '}
+              <Button className="button-empty-card-page">Shop now</Button>
             </h1>
           </div>
         ) : (
           <div className="cart">
-            <h1 className="title-cart">
-              Your <RiShoppingCartLine size={32} color="black" />
-            </h1>
             {Object.keys(cart).map(id => (
               <SingleCartItem
                 key={id}
@@ -79,11 +76,11 @@ class Cart extends Component {
                 quantity={cart[id]}
               />
             ))}
-            <Link to="/checkout">
-              <Button size="lg" className="button-checkout">
+            <Row className="button-checkout-row">
+              <Button href="/checkout" size="lg" className="button-checkout">
                 Checkout
               </Button>
-            </Link>
+            </Row>
           </div>
         )}
       </div>

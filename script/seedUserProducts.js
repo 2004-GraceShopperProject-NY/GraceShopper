@@ -24,7 +24,7 @@ const products = [
     description: 'DESTROY those germs!!'
   },
   {
-    name: 'Clorax',
+    name: 'Clorox',
     quantity: 100,
     price: '1200',
     imageUrl: 'https://m.media-amazon.com/images/I/81YT7MiwwTL._AC_UL320_.jpg',

@@ -26,7 +26,6 @@ class SingleProduct extends Component {
     this.setState({[event.target.name]: event.target.value});
 
   addToCart = () => {
-    console.log('quantity being added', this.state.quantity);
     this.props.isLoggedIn
       ? this.props.addToCartLoggedIn(this.props.product, this.state.quantity)
       : this.props.addToCartThunk(this.props.product, this.state.quantity);

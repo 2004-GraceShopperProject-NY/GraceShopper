@@ -21,6 +21,7 @@ export const addToCartLoggedIn = (product, quantity) => {
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/cart/${product.id}/${quantity}`);
+      console.log('this is the product', typeof product.id);
       dispatch(addedToCart(product, data.quantity));
     } catch (error) {
       console.error(error);
@@ -32,19 +33,10 @@ export const addToCartLoggedIn = (product, quantity) => {
 export default function loggedInCartReducer(state = [], action) {
   switch (action.type) {
     case ADD_TO_CART:
-      if (
-        state.some(product => {
-          return product.id === action.product.id;
-        })
-      ) {
-        return [...state].map(product => {
-          if (product.id === action.product.id) {
-            product.quantity = action.quantity;
-          }
-        });
-      } else {
-        return [...state, {...action.product, quantity: action.quantity}];
-      }
+      let filteredState = state.filter(
+        product => product.id !== action.product.id
+      );
+      return [...filteredState, {...action.product, quantity: action.quantity}];
     default:
       return state;
   }

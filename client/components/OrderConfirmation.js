@@ -1,6 +1,4 @@
 import React from 'react';
-
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Button} from 'reactstrap';
 
@@ -12,7 +10,9 @@ const OrderConfirmation = props => {
       <h2 className="confirmation-home-page">
         Thank you for shopping with us! Your order has been placed!
       </h2>
-      <h3 className="confirmation-home-page2">Confirmation #: {confirmationNum}</h3>
+      <h3 className="confirmation-home-page2">
+        Confirmation #: {confirmationNum}
+      </h3>
       <h4 className="confirmation-home-page2">
         May the odds be ever in your favor
       </h4>

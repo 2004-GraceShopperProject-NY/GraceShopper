@@ -53,7 +53,7 @@ Order.addOrCreateOrder = async function(userId) {
 
 // add item to that order#
 Order.prototype.addItemToOrder = async function(productId, quantity) {
-  //gues would not have an item in selectedItem
+  //guest would not have an item in selectedItem
   const item = await SelectedItem.findOne({
     where: {
       productId,

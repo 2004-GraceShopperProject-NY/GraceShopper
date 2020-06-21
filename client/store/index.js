@@ -5,10 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import user from './user';
 import products from './products';
 import cart from './guestCart';
-import loggedInCart from './loggedInCart';
 import checkedOutInfo from './checkoutCart';
 
-const reducer = combineReducers({user, products, cart, loggedInCart,checkedOutInfo});
+const reducer = combineReducers({user, products, cart, checkedOutInfo});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 );

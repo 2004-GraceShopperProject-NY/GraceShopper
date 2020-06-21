@@ -5,7 +5,6 @@ import {AllProducts as UnconnectedAllProducts} from './AllProducts';
 import {expect} from 'chai';
 import {Link} from 'react-router-dom';
 import {Button} from 'reactstrap';
-import sinon from 'sinon';
 
 const adapter = new Adapter();
 enzyme.configure({adapter});
@@ -31,18 +30,9 @@ describe.only('<AllProducts /> component', () => {
   ];
 
   describe('AllProducts items', () => {
-    const getProductsSpy = sinon.spy();
-    afterEach(() => {
-      getProductsSpy.resetHistory();
-    });
-
     it('renders the products passed in as props', () => {
       const wrapper = shallow(
-        <UnconnectedAllProducts
-          products={allProducts}
-          allProducts={() => {}}
-          getProducts={getProductsSpy}
-        />
+        <UnconnectedAllProducts products={allProducts} allProducts={() => {}} />
       );
 
       expect(wrapper.text()).to.include('Catan');
@@ -80,7 +70,6 @@ describe.only('<AllProducts /> component', () => {
         <UnconnectedAllProducts
           products={differentProducts}
           allProducts={() => {}}
-          getProducts={getProductsSpy}
         />
       );
       expect(wrapper.text()).to.not.include('Catan');

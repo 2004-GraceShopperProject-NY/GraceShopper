@@ -31,15 +31,12 @@ class Cart extends Component {
         {JSON.stringify(cart) === '{}' || !products.length ? (
           <div>
             <h1 className="title-cart">
-              <RiShoppingCartLine size={20} color="darkcyan" />{' '}
-              <div className="cart">is empty </div>
+              <RiShoppingCartLine size={200} color="darkcyan" />{' '}
+              <Button className="button-empty-card-page">Shop now</Button>
             </h1>
           </div>
         ) : (
           <div className="cart">
-            <h1 className="title-cart">
-              <RiShoppingCartLine size={32} color="darkcyan" />
-            </h1>
             {Object.keys(cart).map(id => (
               <SingleCartItem
                 key={id}

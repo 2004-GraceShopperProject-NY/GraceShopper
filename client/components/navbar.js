@@ -6,9 +6,11 @@ import {logout} from '../store';
 import {Navbar, Row, Col} from 'react-bootstrap';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {getCartThunk} from '../store/guestCart';
+import {fetchProducts} from '../store/products';
 
 class MainNavbar extends Component {
   componentWillMount() {
+    this.props.allProducts();
     this.props.getCartThunk();
   }
 
@@ -85,6 +87,9 @@ const mapDispatch = dispatch => {
     },
     getCartThunk() {
       dispatch(getCartThunk());
+    },
+    allProducts() {
+      dispatch(fetchProducts());
     }
   };
 };

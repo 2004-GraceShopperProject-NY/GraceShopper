@@ -43,11 +43,6 @@ label {
   font-size: 16px;
 }
 
-.cart {
-  font-size: 16px;
-  color: black;
-}
-
 .website-name {
   size: 32px;
   letter-spacing: 5px;
@@ -56,7 +51,7 @@ label {
 }
 
 form div {
-  margin: 1em;
+  margin: 10px;
   display: inline-block;
 }
 
@@ -109,8 +104,23 @@ form div {
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 50px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   background-color: yellow;
-  color: black;
+  font-weight: lighter;
+  width: 180px;
+  color: darkcyan;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.button-confirmation {
+  width: 180px;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-weight: lighter;
+  background-color: yellow;
+  letter-spacing: 3px;
   -webkit-box-shadow: 0 8px 6px -6px black;
   -moz-box-shadow: 0 8px 6px -6px black;
   box-shadow: 0 8px 6px -6px black;
@@ -141,7 +151,10 @@ form div {
 }
 
 .title-cart {
-  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .single-in-all-products {
@@ -197,6 +210,7 @@ form div {
 
 .container {
   max-width: 960px;
+  background-color: whitesmoke;
 }
 
 .lh-condensed {
@@ -253,7 +267,17 @@ form div {
   align-self: center;
 }
 
-.welcome-user {
+.lead {
+  color: #6c757d;
+}
+
+.mb-3 {
+  color: #6c757d;
+  margin: 3px;
+}
+
+.welcome-user,
+.checkout-title {
   margin: 20px;
   size: 32px;
   color: darkcyan;
@@ -276,6 +300,19 @@ form div {
 }
 
 .button-start-new-order {
+  background-color: yellow;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.button-empty-card-page {
+  width: 180px;
+  margin-top: 20px;
   background-color: yellow;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -312,7 +349,8 @@ form div {
   flex-direction: row;
 }
 
-.button-checkout-row {
+.button-checkout-row,
+.button-confirmation-row {
   display: flex;
   justify-content: center;
   align-self: center;

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import axios from 'axios';
-import {Col, Row, Link, Button} from 'reactstrap';
+// import {Col, Row, Link, Button} from 'reactstrap';
 
 /**
  * COMPONENT
@@ -41,5 +40,5 @@ export default connect(mapState)(UserHome);
  * PROP TYPES
  */
 UserHome.propTypes = {
-  email: PropTypes.string
+  // email: PropTypes.string
 };

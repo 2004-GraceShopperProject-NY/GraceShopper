@@ -29,6 +29,7 @@ const createConfirmationNumber = () => {
   for (let i = 0; i < 10; i++) {
     results += rollDie();
   }
+  // eslint-disable-next-line radix
   return parseInt(results);
 };
 

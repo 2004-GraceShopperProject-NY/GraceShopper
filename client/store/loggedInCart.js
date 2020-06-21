@@ -34,7 +34,7 @@ export default function loggedInCartReducer(state = [], action) {
     case ADD_TO_CART:
       if (
         state.some(product => {
-          // product.id === action.product.id;
+          return product.id === action.product.id;
         })
       ) {
         return [...state].map(product => {

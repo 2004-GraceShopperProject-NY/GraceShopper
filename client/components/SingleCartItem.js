@@ -5,7 +5,7 @@ import {RiShoppingCartLine} from 'react-icons/ri';
 import {Col, Button} from 'reactstrap';
 import {updateQuantityThunk, removeFromCart} from '../store/guestCart';
 
-class SingleCartItem extends Component {
+export class SingleCartItem extends Component {
   constructor() {
     super();
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
@@ -15,7 +15,7 @@ class SingleCartItem extends Component {
     let quantity = parseInt(event.target.value, 10);
     quantity = quantity ? quantity : 0;
     if (quantity <= 0) {
-      this.props.removeFromCart(productId)
+      this.props.removeFromCart(productId);
     } else if (quantity <= this.props.product.quantity) {
       this.props.updateQuantity(productId, quantity);
     } else {

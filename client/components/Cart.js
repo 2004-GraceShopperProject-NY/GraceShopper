@@ -7,7 +7,7 @@ import {RiShoppingCartLine} from 'react-icons/ri';
 import {Button, Row} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-class Cart extends Component {
+export class Cart extends Component {
   constructor() {
     super();
     this.findProduct = this.findProduct.bind(this);

@@ -9,7 +9,7 @@ import {Button} from 'reactstrap';
 const adapter = new Adapter();
 enzyme.configure({adapter});
 
-describe.only('<AllProducts /> component', () => {
+describe('<AllProducts /> component', () => {
   const allProducts = [
     {
       id: 1,

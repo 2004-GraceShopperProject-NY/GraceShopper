@@ -60,6 +60,15 @@ class CheckoutCartList extends Component {
             <strong>{priceToDollar(this.getTotalPrice())}</strong>
           </li>
         </ul>
+        <div className="button-confirmation-row">
+          <Button
+            className="button-confirmation"
+            type="submit"
+            onClick={this.handleSubmit}
+          >
+            Confirm Order
+          </Button>
+        </div>
       </div>
     );
   }

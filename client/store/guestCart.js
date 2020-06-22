@@ -31,7 +31,6 @@ export const removedItem = productId => {
 
 //THUNK
 export const addToCartThunk = (product, quantity) => {
-  console.log(quantity, typeof quantity);
   return dispatch => {
     try {
       let cart = localStorage.getItem('cart')
@@ -49,6 +48,36 @@ export const addToCartThunk = (product, quantity) => {
       dispatch(getCartItems(cart));
     } catch (error) {
       console.log('Error adding to cart: ', error);
+    }
+  };
+};
+
+export const addToDb = (product, quantity) => {
+  return async () => {
+    try {
+      await Axios.post('/api/cart', {product, quantity});
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const removeFromDb = id => {
+  return async () => {
+    try {
+      await Axios.delete(`/api/cart/${id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const updateDbQuantity = (product, quantity) => {
+  return async () => {
+    try {
+      await Axios.put('/api/cart', {product, quantity});
+    } catch (error) {
+      console.error(error);
     }
   };
 };

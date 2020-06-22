@@ -4,7 +4,7 @@ import {getSingleProduct} from '../store/products';
 import {Col, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {addToCartThunk} from '../store/guestCart';
+import {addToCartThunk, addToDb} from '../store/guestCart';
 
 export class SingleProduct extends Component {
   constructor() {
@@ -24,6 +24,9 @@ export class SingleProduct extends Component {
     this.setState({[event.target.name]: event.target.value});
 
   addToCart = () => {
+    if (this.props.isLoggedIn) {
+      this.props.addToDb(this.props.product, this.state.quantity);
+    }
     this.props.addToCartThunk(this.props.product, this.state.quantity);
     this.setState({
       quantity: 1
@@ -65,7 +68,8 @@ export class SingleProduct extends Component {
 const mapStateToProps = state => {
   return {
     product: state.products.selectedProduct,
-    cart: state.cart
+    cart: state.cart,
+    isLoggedIn: !!state.user.id
   };
 };
 
@@ -73,7 +77,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getSingleProduct: productId => dispatch(getSingleProduct(productId)),
     addToCartThunk: (product, quantity) =>
-      dispatch(addToCartThunk(product, quantity))
+      dispatch(addToCartThunk(product, quantity)),
+    addToDb: (product, quantity) => dispatch(addToDb(product, quantity))
   };
 };
 

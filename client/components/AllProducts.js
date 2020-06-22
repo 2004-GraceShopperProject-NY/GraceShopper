@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
-import {addToCartThunk} from '../store/guestCart';
+import {addToCartThunk, addToDb} from '../store/guestCart';
 
 export class AllProducts extends Component {
   constructor() {
@@ -20,6 +20,9 @@ export class AllProducts extends Component {
   }
 
   addToCart = product => {
+    if (this.props.isLoggedIn) {
+      this.props.addToDb(product, this.state.quantity);
+    }
     this.props.addToCartThunk(product, this.state.quantity);
   };
 
@@ -64,7 +67,8 @@ export class AllProducts extends Component {
 const mapStateToProps = state => {
   return {
     userLoggedIn: state.user,
-    products: state.products.allProducts
+    products: state.products.allProducts,
+    isLoggedIn: !!state.user.id
   };
 };
 
@@ -73,7 +77,8 @@ const mapDispatchToProps = dispatch => {
     allProducts: () => dispatch(fetchProducts()),
     addToCartThunk: (product, quantity) =>
       dispatch(addToCartThunk(product, quantity)),
-    deleteProduct: id => dispatch(deleteProductThunk(id))
+    deleteProduct: id => dispatch(deleteProductThunk(id)),
+    addToDb: (product, quantity) => dispatch(addToDb(product, quantity))
   };
 };
 

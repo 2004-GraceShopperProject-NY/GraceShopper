@@ -28,11 +28,12 @@ class CheckoutPayment extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.checkoutCart();
+    this.props.checkoutCart(this.props.cart);
   }
 
   render() {
     const {cart} = this.props;
+    console.log('cart in component', this.props.cart);
 
     return (
       <Container className="container">
@@ -576,7 +577,7 @@ class CheckoutPayment extends Component {
                 <Button
                   className="button-confirmation"
                   type="submit"
-                  onClick={this.handleSubmit}
+                  onClick={event => this.handleSubmit(event)}
                 >
                   Confirm Order
                 </Button>
@@ -598,7 +599,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    checkoutCart: () => dispatch(checkOutCart())
+    checkoutCart: cart => dispatch(checkOutCart(cart))
   };
 };
 

@@ -74,4 +74,16 @@ Order.prototype.addItemToOrder = async function(productId, quantity) {
   }
 };
 
+Order.prototype.updateItems = async function(productId, quantity) {
+  const item = await SelectedItem.findOne({
+    where: {
+      productId,
+      orderId: this.id
+    }
+  });
+  if (item) {
+    return item.update({quantity});
+  }
+};
+
 module.exports = Order;

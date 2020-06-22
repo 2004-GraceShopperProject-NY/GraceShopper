@@ -112,7 +112,7 @@ label {
 }
 
 form div {
-  margin: 10px;
+  margin: 0px;
   display: inline-block;
 }
 
@@ -135,6 +135,16 @@ form div {
   margin-left: 10px;
   background-color: #afeeee;
   color: black;
+}
+
+.button-add-new-product {
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: yellow;
+  color: darkcyan;
+  width: 100px;
+  align-self: center;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 /* 
 .remove-icon {
@@ -270,7 +280,8 @@ form div {
   padding-left: 20px;
 }
 
-.title-single-product {
+.title-single-product,
+.add-form-title {
   padding-top: 10px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -495,4 +506,13 @@ form div {
   text-align: center;
   padding-left: 20px;
   letter-spacing: 3px;
+}
+
+.add-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  padding-right: 20px;
+  padding-left: 20px;
 }

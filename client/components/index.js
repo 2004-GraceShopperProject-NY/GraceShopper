@@ -16,4 +16,4 @@ export {default as Checkout} from './Checkout';
 export {default as CheckoutCartItem} from './CheckoutCartItem';
 export {default as CheckoutCartList} from './CheckoutCartList';
 export {default as Footer} from './Footer';
-
+export {default as NewProductForm} from './NewProductForm';

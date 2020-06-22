@@ -11,7 +11,8 @@ import {
   Cart,
   HomePage,
   Checkout,
-  OrderConfirmation
+  OrderConfirmation,
+  NewProductForm
 } from './components';
 import {me} from './store';
 
@@ -37,6 +38,7 @@ class Routes extends Component {
         <Route exact path="/products/:id" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/add_new_product" component={NewProductForm} />
         <Route
           exact
           path="/checkout/orderConfirmation"

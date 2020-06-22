@@ -28,6 +28,7 @@ router.get('/', adminOnly, async (req, res, next) => {
 
 router.put('/:productId', adminOnly, async (req, res, next) => {
   try {
+    const {quantity} = req.body;
     const [numOfAffectedRows, affectedRows] = await Product.update(req.body, {
       where: {
         id: req.params.productId

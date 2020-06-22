@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getSingleProduct} from '../store/products';
+import {getSingleProduct, updateProductAdminThunk} from '../store/products';
 import {Col, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
@@ -10,7 +10,8 @@ export class SingleProduct extends Component {
   constructor() {
     super();
     this.state = {
-      quantity: 1
+      quantity: 1,
+      adminUpdateQuantity: 0
     };
     this.addToCart = this.addToCart.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -60,6 +61,32 @@ export class SingleProduct extends Component {
             Add to <RiShoppingCartLine size={20} color="black" />
           </Button>
         </div>
+        {this.props.userLoggedIn.role === 'admin' ? (
+          <div>
+            <h2>Update this product:</h2>
+            <input
+              name="adminUpdateQuantity"
+              min="0"
+              placeholder="# of items in stock"
+              type="number"
+              value={this.state.adminUpdateQuantity}
+              onChange={this.handleInputChange}
+            />
+            <Button
+              onClick={() =>
+                this.props.updateProduct(
+                  product.id,
+                  this.state.adminUpdateQuantity
+                )
+              }
+              className="button-add-to-cart"
+            >
+              UPDATE
+            </Button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     );
   }
@@ -67,6 +94,7 @@ export class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
+    userLoggedIn: state.user,
     product: state.products.selectedProduct,
     cart: state.cart,
     isLoggedIn: !!state.user.id
@@ -76,6 +104,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSingleProduct: productId => dispatch(getSingleProduct(productId)),
+    updateProduct: (productId, quantity) =>
+      dispatch(updateProductAdminThunk(productId, quantity)),
     addToCartThunk: (product, quantity) =>
       dispatch(addToCartThunk(product, quantity)),
     addToDb: (product, quantity) => dispatch(addToDb(product, quantity))

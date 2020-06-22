@@ -82,6 +82,18 @@ export const updateProductAdminThunk = (productId, quantity) => {
   };
 };
 
+export const AdminAddNewProductThunk = data => {
+  return async dispatch => {
+    try {
+      await Axios.post('/api/admin', data);
+      const product = await Axios.get(`/api/products`, data);
+      dispatch(allProducts(product.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 const initialState = {
   allProducts: [],
   selectedProduct: {}

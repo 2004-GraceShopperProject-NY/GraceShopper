@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getSingleProduct, updateProductAdminThunk} from '../store/products';
-import {Col, Button} from 'reactstrap';
+import {Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {addToCartThunk} from '../store/guestCart';

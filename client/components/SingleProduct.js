@@ -34,32 +34,28 @@ export class SingleProduct extends Component {
     const {product} = this.props;
 
     return (
-      <div>
-        <h2 className="title-single-product">{product.name}</h2>
-        <div className="single-view-item">
-          <Col>
-            <img src={product.imageUrl} height="200px" />
-          </Col>
-          <Col>
-            <div>Price: {priceToDollar(product.price)}</div>
-            <div>Description:</div>
-            <div>{product.description}</div>
-            <div>Quantity</div>
-            <input
-              type="number"
-              value={this.state.quantity}
-              name="quantity"
-              onChange={this.handleInputChange}
-              className="float-right"
-              style={{width: '60px', marginRight: '10px', borderRadius: '3px'}}
-            />
-            <Button
-              className="button-add-to-cart"
-              onClick={() => this.addToCart()}
-            >
-              Add to <RiShoppingCartLine size={20} color="black" />
-            </Button>
-          </Col>
+      <div className="single-view-main">
+        <h2 className="title-single-product-view">{product.name}</h2>
+        <div className="single-view-item-page">
+          <img src={product.imageUrl} height="200px" />
+          <div className="price-all-products">
+            {priceToDollar(product.price)} x
+          </div>
+          <input
+            type="number"
+            value={this.state.quantity}
+            name="quantity"
+            onChange={this.handleInputChange}
+            className="float-right"
+            style={{width: '60px', marginRight: '10px', borderRadius: '3px'}}
+          />
+          <div>{product.description}</div>
+          <Button
+            className="button-add-to-cart"
+            onClick={() => this.addToCart()}
+          >
+            Add to <RiShoppingCartLine size={20} color="black" />
+          </Button>
         </div>
       </div>
     );

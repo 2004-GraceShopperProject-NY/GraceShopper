@@ -32,7 +32,9 @@ export class Cart extends Component {
           <div>
             <h1 className="title-cart">
               <RiShoppingCartLine size={200} color="darkcyan" />{' '}
-              <Button className="button-empty-card-page">Shop now</Button>
+              <Button href="/products" className="button-empty-card-page">
+                Shop now
+              </Button>
             </h1>
           </div>
         ) : (

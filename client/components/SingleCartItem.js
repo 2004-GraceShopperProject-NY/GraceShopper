@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
-import {RiShoppingCartLine} from 'react-icons/ri';
+import {FcAbout} from 'react-icons/fc';
+import {FiDelete} from 'react-icons/fi';
 import {Col, Button} from 'reactstrap';
 import {updateQuantityThunk, removeFromCart} from '../store/guestCart';
 
@@ -28,17 +29,20 @@ export class SingleCartItem extends Component {
     const {id, name, imageUrl, price, description} = product;
     return (
       <div>
-        <h2 className="title-single-product">{name}</h2>
+        {/* <h2 className="title-single-product">{name}</h2> */}
         <div className="single-view-item">
-          <Col>
+          <Col sm={1} className="remove-icon">
+            <FiDelete onClick={() => this.props.removeFromCart(id)} size={40} />
+          </Col>
+          <Col sm={5}>
             <img src={imageUrl} height="200px" />
           </Col>
-          <Col>
-            <div className="item-total-price">
-              Total Price: {priceToDollar(price * quantity)}
-            </div>
+          <Col sm={2} className="quantity-input">
+            <h2 className="title-single-product">{name}</h2>
+          </Col>
+          <Col sm={2} className="quantity-input">
             <div>
-              Quantity:{' '}
+              {' '}
               <input
                 className="quantity"
                 type="number"
@@ -53,16 +57,13 @@ export class SingleCartItem extends Component {
                 }}
               />
             </div>
-            <div>Item Price: {priceToDollar(price)}</div>
-            <div>Description:</div>
-            <div>{description}</div>
-
-            <Button
-              className="button-remove-from-cart"
-              onClick={() => this.props.removeFromCart(id)}
-            >
-              Remove from <RiShoppingCartLine size={20} color="black" />
-            </Button>
+          </Col>
+          <Col sm={2} className="quantity-input">
+            <div className="item-total-price">
+              {priceToDollar(price * quantity)}
+            </div>
+            {/* <div>Item Price: {priceToDollar(price)}</div> */}
+            {/* <div>{description}</div> */}
           </Col>
         </div>
       </div>

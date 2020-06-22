@@ -28,7 +28,7 @@ class SingleCartItem extends Component {
     const {product, quantity} = this.props;
     const {id, name, imageUrl, price, description} = product;
     return (
-      <div>
+      <div className="single-view-main">
         <div className="single-view-item">
           <FiDelete onClick={() => this.props.removeFromCart(id)} size={40} />
           <img src={imageUrl} height="200px" />

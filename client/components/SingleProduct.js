@@ -34,12 +34,11 @@ export class SingleProduct extends Component {
     const {product} = this.props;
 
     return (
-      <div>
-        <h2 className="title-single-product">{product.name}</h2>
+      <div className="single-view-main">
+        <h2 className="title-single-product-view">{product.name}</h2>
         <div className="single-view-item-page">
           <img src={product.imageUrl} height="200px" />
           <div>{priceToDollar(product.price)}</div>
-          <div>{product.description}</div>
           <input
             type="number"
             value={this.state.quantity}
@@ -48,6 +47,7 @@ export class SingleProduct extends Component {
             className="float-right"
             style={{width: '60px', marginRight: '10px', borderRadius: '3px'}}
           />
+          <div>{product.description}</div>
           <Button
             className="button-add-to-cart"
             onClick={() => this.addToCart()}

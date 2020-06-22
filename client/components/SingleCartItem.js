@@ -29,42 +29,31 @@ class SingleCartItem extends Component {
     const {id, name, imageUrl, price, description} = product;
     return (
       <div>
-        {/* <h2 className="title-single-product">{name}</h2> */}
         <div className="single-view-item">
-          <Col sm={1} className="remove-icon">
-            <FiDelete onClick={() => this.props.removeFromCart(id)} size={40} />
-          </Col>
-          <Col sm={5}>
-            <img src={imageUrl} height="200px" />
-          </Col>
-          <Col sm={2} className="quantity-input">
-            <h2 className="title-single-product">{name}</h2>
-          </Col>
-          <Col sm={2} className="quantity-input">
-            <div>
-              {' '}
-              <input
-                className="quantity"
-                type="number"
-                min="0"
-                value={quantity}
-                name="quantity"
-                onChange={() => this.handleQuantityChange(event, id)}
-                style={{
-                  width: '60px',
-                  marginRight: '10px',
-                  borderRadius: '3px'
-                }}
-              />
-            </div>
-          </Col>
-          <Col sm={2} className="quantity-input">
-            <div className="item-total-price">
-              {priceToDollar(price * quantity)}
-            </div>
-            {/* <div>Item Price: {priceToDollar(price)}</div> */}
-            {/* <div>{description}</div> */}
-          </Col>
+          <FiDelete onClick={() => this.props.removeFromCart(id)} size={40} />
+          <img src={imageUrl} height="200px" />
+          <h2 className="title-single-product">{name}</h2>
+          <div>
+            {' '}
+            <input
+              className="quantity"
+              type="number"
+              min="0"
+              value={quantity}
+              name="quantity"
+              onChange={() => this.handleQuantityChange(event, id)}
+              style={{
+                width: '60px',
+                marginRight: '10px',
+                borderRadius: '3px'
+              }}
+            />
+          </div>
+          <div className="item-total-price">
+            {priceToDollar(price * quantity)}
+          </div>
+          {/* <div>Item Price: {priceToDollar(price)}</div> */}
+          {/* <div>{description}</div> */}
         </div>
       </div>
     );

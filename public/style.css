@@ -136,12 +136,12 @@ form div {
   background-color: #afeeee;
   color: black;
 }
-
+/* 
 .remove-icon {
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
+} */
 
 .quantity-input {
   display: flex;
@@ -278,13 +278,14 @@ form div {
 .single-view-item {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
-  text-align: center;
   padding: 1em;
   margin-right: 15em;
   margin-left: 15em;
   margin-top: 3em;
   border: 4px solid #afeeee;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
 
 .title-home-page,
@@ -349,7 +350,6 @@ form div {
 
 .confirmation-home-page2 {
   align-self: center;
-  font-style: italic;
 }
 
 .row-image-center {

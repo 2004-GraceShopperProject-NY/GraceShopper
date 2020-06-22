@@ -35,8 +35,10 @@ class AllProducts extends Component {
               <Link to={`/products/${product.id}`}>
                 <img src={product.imageUrl} height="200px" />
               </Link>
-              <h6>{product.name}</h6>
-              <h6>Price: {priceToDollar(product.price)}</h6>
+              <div className="title-name-all-products">{product.name}</div>
+              <div className="price-all-products">
+                {priceToDollar(product.price)}
+              </div>
               <Button
                 className="button-add-to-cart"
                 onClick={() => this.addToCart(product)}

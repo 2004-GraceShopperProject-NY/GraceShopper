@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getSingleProduct} from '../store/products';
+import {getSingleProduct, updateProductAdminThunk} from '../store/products';
 import {Col, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {addToCartThunk} from '../store/guestCart';
-import {updateProductAdminThunk} from '../store/products';
 
 export class SingleProduct extends Component {
   constructor() {
     super();
     this.state = {
-      quantity: 1
+      quantity: 1,
+      adminUpdateQuantity: 0
     };
     this.addToCart = this.addToCart.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -37,21 +37,6 @@ export class SingleProduct extends Component {
     return (
       <div className="single-view-main">
         <h2 className="title-single-product-view">{product.name}</h2>
-        <input
-          name="quantity"
-          min="0"
-          type="number"
-          value={this.state.quantity}
-          onChange={this.handleInputChange}
-        />
-        <Button
-          onClick={() =>
-            this.props.updateProduct(product.id, this.state.quantity)
-          }
-          className="button-add-to-cart"
-        >
-          HERE
-        </Button>
         <div className="single-view-item-page">
           <img src={product.imageUrl} height="200px" />
           <div className="price-all-products">
@@ -73,6 +58,32 @@ export class SingleProduct extends Component {
             Add to <RiShoppingCartLine size={20} color="black" />
           </Button>
         </div>
+        {this.props.userLoggedIn.role === 'admin' ? (
+          <div>
+            <h2>Update this product:</h2>
+            <input
+              name="adminUpdateQuantity"
+              min="0"
+              placeholder="# of items in stock"
+              type="number"
+              value={this.state.adminUpdateQuantity}
+              onChange={this.handleInputChange}
+            />
+            <Button
+              onClick={() =>
+                this.props.updateProduct(
+                  product.id,
+                  this.state.adminUpdateQuantity
+                )
+              }
+              className="button-add-to-cart"
+            >
+              UPDATE
+            </Button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     );
   }
@@ -80,6 +91,7 @@ export class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
+    userLoggedIn: state.user,
     product: state.products.selectedProduct,
     cart: state.cart
   };

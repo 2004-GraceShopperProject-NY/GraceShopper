@@ -29,6 +29,13 @@ export class AllProducts extends Component {
     return (
       <div>
         <h2 className="title-all-products">What are you looking for today?</h2>
+        {userLoggedIn.role === 'admin' ? (
+          <Button href="./add_new_product" className="button-add-to-cart">
+            Add new product
+          </Button>
+        ) : (
+          ''
+        )}
         <div className="all-products">
           {products.map(product => (
             <div className="single-in-all-products" key={product.id}>

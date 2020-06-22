@@ -38,7 +38,9 @@ export class SingleProduct extends Component {
         <h2 className="title-single-product-view">{product.name}</h2>
         <div className="single-view-item-page">
           <img src={product.imageUrl} height="200px" />
-          <div>{priceToDollar(product.price)}</div>
+          <div className="price-all-products">
+            {priceToDollar(product.price)} x
+          </div>
           <input
             type="number"
             value={this.state.quantity}

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchProducts} from '../store/products';
+import {fetchProducts, deleteProductThunk} from '../store/products';
 import {Link} from 'react-router-dom';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {Button} from 'reactstrap';
@@ -24,7 +24,7 @@ export class AllProducts extends Component {
   };
 
   render() {
-    const {products} = this.props;
+    const {products, deleteProduct, userLoggedIn} = this.props;
 
     return (
       <div>
@@ -43,6 +43,14 @@ export class AllProducts extends Component {
               >
                 Add to <RiShoppingCartLine size={20} color="black" />
               </Button>
+
+              {userLoggedIn.role === 'admin' ? (
+                <Button onClick={() => deleteProduct(product.id)}>
+                  Delete Product
+                </Button>
+              ) : (
+                ''
+              )}
             </div>
           ))}
         </div>
@@ -53,6 +61,7 @@ export class AllProducts extends Component {
 
 const mapStateToProps = state => {
   return {
+    userLoggedIn: state.user,
     products: state.products.allProducts
   };
 };
@@ -61,7 +70,8 @@ const mapDispatchToProps = dispatch => {
   return {
     allProducts: () => dispatch(fetchProducts()),
     addToCartThunk: (product, quantity) =>
-      dispatch(addToCartThunk(product, quantity))
+      dispatch(addToCartThunk(product, quantity)),
+    deleteProduct: id => dispatch(deleteProductThunk(id))
   };
 };
 

@@ -44,21 +44,4 @@ router.post('/checkout/guest', async (req, res, next) => {
   }
 });
 
-//TO BE EDITED !!!
-// router.post('/checkout/user', async (req, res, next) => {
-//   try {
-//     const order = await Order.findByPk(req.user.id);
-//     await order.update({bought: false});
-//     order.confirmationNum = Order.createConfirmationNumber();
-//     await order.save();
-//     const product = await Product.findByPk(productId);
-//     await product.update({
-//       quantity: parseInt(product.quantity) - parseInt(req.body.cart[productId]),
-//     });
-//     res.json(order);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 module.exports = router;

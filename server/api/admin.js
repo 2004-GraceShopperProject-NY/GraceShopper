@@ -3,6 +3,7 @@ const {User, Product} = require('../db/models');
 
 // checks if admin
 function adminOnly(req, res, next) {
+  console.log(req.user);
   if (req.user.role === 'admin') {
     next();
   } else {
@@ -30,7 +31,7 @@ router.put('/:productId', adminOnly, async (req, res, next) => {
       plain: true
     });
     if (!affectedRows) {
-      res.sendState(404);
+      res.sendStatus(404);
     } else {
       res.json(affectedRows);
     }

@@ -12,18 +12,24 @@ export const checkedOutCart = checkedOutInfo => {
 };
 
 //TO BE EDITED!!!
-export const checkOutCart = () => {
+export const checkOutCart = cart => {
   return async (dispatch, getState) => {
     try {
       let user = getState().user.id;
+      let guestCart = JSON.parse(localStorage.getItem('cart'));
       if (!user) {
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        const {data} = await Axios.post('/api/cart/checkout/guest', {cart});
-        localStorage.clear();
+        const {data} = await Axios.post('/api/cart/checkout/guest', {
+          guestCart
+        });
         dispatch(getCartItems({}));
         dispatch(checkedOutCart(data));
-        history.push('/checkout/orderConfirmation');
       }
+      if (user) {
+        console.log('this is the cart', cart);
+        await Axios.put('/api/cart/checkout/user', cart);
+      }
+      history.push('/checkout/orderConfirmation');
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Order, Product} = require('../db/models');
+const {Order, Product, SelectedItem} = require('../db/models');
 
 router.post('/', async (req, res, next) => {
   try {
@@ -16,6 +16,83 @@ router.post('/', async (req, res, next) => {
     } else {
       res.sendStatus(404);
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const order = await Order.findOne({
+        where: {
+          userId: req.user.id
+        }
+      });
+      if (order) {
+        const item = await order.updateItems(
+          req.body.product.id,
+          +req.body.quantity
+        );
+        res.json(item);
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const order = await Order.findOne({
+        where: {
+          userId: req.user.id,
+          bought: false
+        }
+      });
+      if (order) {
+        const item = await Product.findOne({
+          where: {
+            id: req.params.id
+          }
+        });
+        await order.removeProduct(item);
+        res.json(order);
+      }
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put('/checkout/user', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        bought: false
+      }
+    });
+    await order.update({bought: true});
+    const selectedItems = await SelectedItem.findAll({
+      where: {
+        orderId: order.id
+      }
+    });
+
+    for (let productId in req.body.cart) {
+      if (req.body.cart) {
+        const product = await Product.findByPk(productId);
+        await product.update({
+          quantity:
+            parseInt(product.quantity) - parseInt(req.body.cart[productId])
+        });
+      }
+    }
+
+    console.log(selectedItems);
+    res.json(selectedItems);
   } catch (error) {
     next(error);
   }

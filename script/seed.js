@@ -2,7 +2,7 @@
 
 const db = require('../server/db');
 const {User, Product, Order} = require('../server/db/models');
-const {users, products} = require('./seedUserProducts');
+const {admins, products, getUserSeed} = require('./seedUserProducts');
 
 const orders = [
   {
@@ -22,6 +22,11 @@ async function seed() {
         return Product.create(product);
       })
     );
+
+    const users = [...admins];
+    for (let i = 0; i < 100; i++) {
+      users.push(getUserSeed());
+    }
 
     await Promise.all(
       users.map(user => {

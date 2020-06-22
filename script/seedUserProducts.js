@@ -1,3 +1,5 @@
+const faker = require('faker');
+
 const products = [
   {
     name: 'Toilet Paper',
@@ -64,20 +66,20 @@ const products = [
   }
 ];
 
-const users = [
+const admins = [
   {
     firstName: 'Anthony',
     lastName: 'Fauci',
     email: 'anthonyfauci@curecovid.com',
     password: 'coronaslayer',
-    role: 'customer'
+    role: 'admin'
   },
   {
     firstName: 'Andrew',
     lastName: 'Cuomo',
     email: 'andrewcuomo@nycslayscovid.gov',
     password: 'nycslayscovid',
-    role: 'customer'
+    role: 'admin'
   },
   {
     firstName: 'Anna',
@@ -109,7 +111,18 @@ const users = [
   }
 ];
 
+function getUserSeed() {
+  return {
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    role: 'customer'
+  };
+}
+
 module.exports = {
   products,
-  users
+  getUserSeed,
+  admins
 };

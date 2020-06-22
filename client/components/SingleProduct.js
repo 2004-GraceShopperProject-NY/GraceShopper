@@ -5,6 +5,7 @@ import {Col, Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
 import {addToCartThunk} from '../store/guestCart';
+import {updateProductAdminThunk} from '../store/products';
 
 export class SingleProduct extends Component {
   constructor() {
@@ -36,6 +37,21 @@ export class SingleProduct extends Component {
     return (
       <div className="single-view-main">
         <h2 className="title-single-product-view">{product.name}</h2>
+        <input
+          name="quantity"
+          min="0"
+          type="number"
+          value={this.state.quantity}
+          onChange={this.handleInputChange}
+        />
+        <Button
+          onClick={() =>
+            this.props.updateProduct(product.id, this.state.quantity)
+          }
+          className="button-add-to-cart"
+        >
+          HERE
+        </Button>
         <div className="single-view-item-page">
           <img src={product.imageUrl} height="200px" />
           <div className="price-all-products">
@@ -72,6 +88,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSingleProduct: productId => dispatch(getSingleProduct(productId)),
+    updateProduct: (productId, quantity) =>
+      dispatch(updateProductAdminThunk(productId, quantity)),
     addToCartThunk: (product, quantity) =>
       dispatch(addToCartThunk(product, quantity))
   };

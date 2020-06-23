@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getCartThunk} from '../store/guestCart';
+import {getCartThunk} from '../store/cart';
 import SingleCartItem from './SingleCartItem';
 import {fetchProducts} from '../store/products';
 import {RiShoppingCartLine} from 'react-icons/ri';

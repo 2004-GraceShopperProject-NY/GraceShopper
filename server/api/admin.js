@@ -3,7 +3,6 @@ const {User, Product} = require('../db/models');
 
 // checks if admin
 function adminOnly(req, res, next) {
-  console.log(req.user);
   if (req.user.role === 'admin') {
     next();
   } else {
@@ -14,7 +13,12 @@ function adminOnly(req, res, next) {
 // Admins can see all users
 router.get('/', adminOnly, async (req, res, next) => {
   try {
-    const user = await User.findAll();
+    const user = await User.findAll({
+      // explicitly select only the id and email fields - even though
+      // users' passwords are encrypted, it won't help if we just
+      // send everything to anyone who asks!
+      attributes: ['id', 'email']
+    });
     res.json(user);
   } catch (error) {
     next(error);
@@ -23,7 +27,6 @@ router.get('/', adminOnly, async (req, res, next) => {
 
 router.put('/:productId', adminOnly, async (req, res, next) => {
   try {
-    const {quantity} = req.body;
     const [numOfAffectedRows, affectedRows] = await Product.update(req.body, {
       where: {
         id: req.params.productId

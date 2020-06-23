@@ -4,14 +4,16 @@ import {getSingleProduct, updateProductAdminThunk} from '../store/products';
 import {Button} from 'reactstrap';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {addToCartThunk} from '../store/guestCart';
+import {addToCartThunk, addToDb} from '../store/cart';
 
 export class SingleProduct extends Component {
   constructor() {
     super();
     this.state = {
       quantity: 1,
-      adminUpdateQuantity: 0
+      adminUpdateQuantity: '',
+      description: '',
+      productName: ''
     };
     this.addToCart = this.addToCart.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,9 +27,21 @@ export class SingleProduct extends Component {
     this.setState({[event.target.name]: event.target.value});
 
   addToCart = () => {
+    if (this.props.isLoggedIn) {
+      this.props.addToDb(this.props.product, this.state.quantity);
+    }
     this.props.addToCartThunk(this.props.product, this.state.quantity);
     this.setState({
       quantity: 1
+    });
+  };
+
+  updateProduct = () => {
+    this.props.updateProduct(this.props.product.id, this.state);
+    this.setState({
+      adminUpdateQuantity: '',
+      description: '',
+      productName: ''
     });
   };
 
@@ -58,32 +72,57 @@ export class SingleProduct extends Component {
             Add to <RiShoppingCartLine size={20} color="black" />
           </Button>
         </div>
-        {this.props.userLoggedIn.role === 'admin' ? (
-          <div>
-            <h2>Update this product:</h2>
-            <input
-              name="adminUpdateQuantity"
-              min="0"
-              placeholder="# of items in stock"
-              type="number"
-              value={this.state.adminUpdateQuantity}
-              onChange={this.handleInputChange}
-            />
-            <Button
-              onClick={() =>
-                this.props.updateProduct(
-                  product.id,
-                  this.state.adminUpdateQuantity
-                )
-              }
-              className="button-add-to-cart"
-            >
-              UPDATE
-            </Button>
+
+        <div className="single-view-main">
+          <div className="single-view-item-page2">
+            {this.props.userLoggedIn.role === 'admin' ? (
+              <div className="update-product">
+                <h2 className="title-single-product-view">
+                  Update this product:
+                </h2>
+                <div className="update-product-info">
+                  <h6>Change Product Name:</h6>
+                  <input
+                    name="productName"
+                    placeholder={product.name}
+                    type="text"
+                    value={this.state.productName}
+                    onChange={this.handleInputChange}
+                  />
+
+                  <h6>Inventory Quantity: </h6>
+                  <input
+                    name="adminUpdateQuantity"
+                    min="0"
+                    placeholder={product.quantity}
+                    type="number"
+                    value={this.state.adminUpdateQuantity}
+                    onChange={this.handleInputChange}
+                  />
+
+                  <h6>New Description:</h6>
+                  <input
+                    name="description"
+                    placeholder={product.description}
+                    type="text"
+                    value={this.state.description}
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+                <div className="button-update">
+                  <Button
+                    onClick={this.updateProduct}
+                    className="button-add-to-cart"
+                  >
+                    UPDATE
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
-        ) : (
-          ''
-        )}
+        </div>
       </div>
     );
   }
@@ -93,17 +132,19 @@ const mapStateToProps = state => {
   return {
     userLoggedIn: state.user,
     product: state.products.selectedProduct,
-    cart: state.cart
+    cart: state.cart,
+    isLoggedIn: !!state.user.id
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getSingleProduct: productId => dispatch(getSingleProduct(productId)),
-    updateProduct: (productId, quantity) =>
-      dispatch(updateProductAdminThunk(productId, quantity)),
+    updateProduct: (productId, updatedInfo) =>
+      dispatch(updateProductAdminThunk(productId, updatedInfo)),
     addToCartThunk: (product, quantity) =>
-      dispatch(addToCartThunk(product, quantity))
+      dispatch(addToCartThunk(product, quantity)),
+    addToDb: (product, quantity) => dispatch(addToDb(product, quantity))
   };
 };
 

@@ -60,6 +60,7 @@ export class SingleProduct extends Component {
             type="number"
             value={this.state.quantity}
             name="quantity"
+            min="0"
             onChange={this.handleInputChange}
             className="float-right"
             style={{width: '60px', marginRight: '10px', borderRadius: '3px'}}
@@ -74,51 +75,51 @@ export class SingleProduct extends Component {
         </div>
 
         {this.props.userLoggedIn.role === 'admin' ? (
-          <div className="single-view-main">
-            <div className="single-view-item-page2">
-              <div className="update-product">
-                <h2 className="title-single-product-view">
-                  Update this product:
-                </h2>
-                <div className="update-product-info">
-                  <h6>Change Product Name:</h6>
-                  <input
-                    name="productName"
-                    placeholder={product.name}
-                    type="text"
-                    value={this.state.productName}
-                    onChange={this.handleInputChange}
-                  />
+          // <div className="single-view-main-2">
+          <div className="single-view-item-page2">
+            <div className="update-product">
+              <h2 className="title-single-product-view">
+                Update this product:
+              </h2>
+              <div className="update-product-info">
+                <h6>Change Product Name:</h6>
+                <input
+                  name="productName"
+                  placeholder={product.name}
+                  type="text"
+                  value={this.state.productName}
+                  onChange={this.handleInputChange}
+                />
 
-                  <h6>Inventory Quantity: </h6>
-                  <input
-                    name="adminUpdateQuantity"
-                    min="0"
-                    placeholder={product.quantity}
-                    type="number"
-                    value={this.state.adminUpdateQuantity}
-                    onChange={this.handleInputChange}
-                  />
+                <h6>Inventory Quantity: </h6>
+                <input
+                  name="adminUpdateQuantity"
+                  min="0"
+                  placeholder={product.quantity}
+                  type="number"
+                  value={this.state.adminUpdateQuantity}
+                  onChange={this.handleInputChange}
+                />
 
-                  <h6>New Description:</h6>
-                  <input
-                    name="description"
-                    placeholder={product.description}
-                    type="text"
-                    value={this.state.description}
-                    onChange={this.handleInputChange}
-                  />
-                </div>
-                <div className="button-update">
-                  <Button
-                    onClick={this.updateProduct}
-                    className="button-add-to-cart"
-                  >
-                    UPDATE
-                  </Button>
-                </div>
+                <h6>New Description:</h6>
+                <input
+                  name="description"
+                  placeholder={product.description}
+                  type="text"
+                  value={this.state.description}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <div className="button-update">
+                <Button
+                  onClick={this.updateProduct}
+                  className="button-add-to-cart"
+                >
+                  UPDATE
+                </Button>
               </div>
             </div>
+            {/* </div> */}
           </div>
         ) : (
           ''

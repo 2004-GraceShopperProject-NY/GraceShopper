@@ -73,9 +73,9 @@ export class SingleProduct extends Component {
           </Button>
         </div>
 
-        <div className="single-view-main">
-          <div className="single-view-item-page2">
-            {this.props.userLoggedIn.role === 'admin' ? (
+        {this.props.userLoggedIn.role === 'admin' ? (
+          <div className="single-view-main">
+            <div className="single-view-item-page2">
               <div className="update-product">
                 <h2 className="title-single-product-view">
                   Update this product:
@@ -118,11 +118,11 @@ export class SingleProduct extends Component {
                   </Button>
                 </div>
               </div>
-            ) : (
-              ''
-            )}
+            </div>
           </div>
-        </div>
+        ) : (
+          ''
+        )}
       </div>
     );
   }

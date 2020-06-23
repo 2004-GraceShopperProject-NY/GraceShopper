@@ -21,6 +21,7 @@ class NewProductForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.AdminAddNewProductThunk(this.state);
+    this.props.history.push('/products');
   }
 
   handleInputChange(event) {
@@ -97,12 +98,7 @@ class NewProductForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <Button
-          href="./products"
-          size="lg"
-          className="button-add-new-product"
-          type="submit"
-        >
+        <Button size="lg" className="button-add-new-product" type="submit">
           Create
         </Button>
       </Form>

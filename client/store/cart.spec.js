@@ -1,14 +1,8 @@
 import {expect} from 'chai';
-import React from 'react';
 import enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
-// import waitForExpect from 'wait-for-expect';
-import {Provider} from 'react-redux';
-import * as rrd from 'react-router-dom';
-
-const {MemoryRouter} = rrd;
 
 const middlewares = [thunkMiddleware];
 const mockStore = configureMockStore(middlewares);

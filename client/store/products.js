@@ -72,7 +72,6 @@ export const deleteProductThunk = productId => {
 export const updateProductAdminThunk = (productId, updatedInfo) => {
   return async dispatch => {
     try {
-      console.log('first update', updatedInfo);
       const updatedData = {};
       if (updatedInfo.description.length !== 0) {
         updatedData.description = updatedInfo.description;
@@ -85,7 +84,6 @@ export const updateProductAdminThunk = (productId, updatedInfo) => {
       if (updatedInfo.productName.length !== 0) {
         updatedData.name = updatedInfo.productName;
       }
-      console.log('UPDATE!', updatedData);
       const {data} = await Axios.put(`/api/admin/${productId}`, updatedData);
       dispatch(updateProductAdmin(data));
     } catch (error) {

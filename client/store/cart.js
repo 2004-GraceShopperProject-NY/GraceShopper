@@ -41,6 +41,7 @@ export const addToCartThunk = (product, quantity) => {
       let qty = parseInt(cart[productId], 10) + parseInt(quantity, 10);
       if (product.quantity === 0) {
         alert('Sorry, we are out of stock!');
+        return;
       } else if (product.quantity < qty) {
         cart[productId] = product.quantity;
       } else {
@@ -58,7 +59,6 @@ export const addToDb = (product, quantity) => {
   return async () => {
     try {
       if (product.quantity === 0) {
-        alert('Sorry, we are out of stock!');
         return;
       } else if (quantity > product.quantity) {
         quantity = product.quantity;

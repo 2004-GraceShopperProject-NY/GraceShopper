@@ -75,7 +75,6 @@ describe('Guest Cart Redux', () => {
       localStorage.setItem('cart', cart);
       fakeStore.dispatch(getCartThunk());
       const actions = fakeStore.getActions();
-      console.log(actions);
       expect(actions[0].type).to.equal('GET_CART_ITEMS');
       expect(actions[0].cart).to.deep.equal(cart);
     });

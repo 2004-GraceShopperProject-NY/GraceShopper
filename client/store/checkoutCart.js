@@ -24,7 +24,6 @@ export const checkOutCart = cart => {
         dispatch(checkedOutCart(data));
       }
       if (user) {
-        console.log('this is the cart', {cart});
         const {data} = await Axios.put('/api/cart/checkout/user', {cart});
         dispatch(getCartItems({}));
         dispatch(checkedOutCart(data));

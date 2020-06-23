@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import {updatedQuantity} from './guestCart';
 
 //ACTION TYPES
 const ALL_PRODUCTS = 'ALL_PRODUCTS';

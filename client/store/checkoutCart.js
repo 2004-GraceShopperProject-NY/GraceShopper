@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {getCartItems} from './guestCart';
+import {getCartItems} from './cart';
 import history from '../history';
 
 const CHECKOUT_CART = 'CHECKOUT_CART';
@@ -11,7 +11,6 @@ export const checkedOutCart = checkedOutInfo => {
   };
 };
 
-//TO BE EDITED!!!
 export const checkOutCart = cart => {
   return async (dispatch, getState) => {
     try {
@@ -19,14 +18,15 @@ export const checkOutCart = cart => {
       let guestCart = JSON.parse(localStorage.getItem('cart'));
       if (!user) {
         const {data} = await Axios.post('/api/cart/checkout/guest', {
-          guestCart
+          cart: guestCart
         });
         dispatch(getCartItems({}));
         dispatch(checkedOutCart(data));
       }
       if (user) {
-        console.log('this is the cart', cart);
-        await Axios.put('/api/cart/checkout/user', cart);
+        const {data} = await Axios.put('/api/cart/checkout/user', {cart});
+        dispatch(getCartItems({}));
+        dispatch(checkedOutCart(data));
       }
       history.push('/checkout/orderConfirmation');
       localStorage.clear();

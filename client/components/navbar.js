@@ -5,11 +5,11 @@ import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import {Navbar, Row, Col} from 'react-bootstrap';
 import {RiShoppingCartLine} from 'react-icons/ri';
-import {getCartThunk} from '../store/guestCart';
+import {getCartThunk} from '../store/cart';
 import {fetchProducts} from '../store/products';
 
 class MainNavbar extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.allProducts();
     this.props.getCartThunk();
   }

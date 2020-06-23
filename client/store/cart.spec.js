@@ -28,7 +28,7 @@ import {
   removeFromCart
 } from '../store/guestCart';
 
-import store, {reducer} from '../store';
+import store, {reducer} from '.';
 import {createStore} from 'redux';
 
 const adapter = new Adapter();

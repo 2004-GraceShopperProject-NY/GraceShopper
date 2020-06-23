@@ -577,7 +577,7 @@ class CheckoutPayment extends Component {
                 <Button
                   className="button-confirmation"
                   type="submit"
-                  onClick={event => this.handleSubmit(event)}
+                  onClick={() => this.handleSubmit(event)}
                 >
                   Confirm Order
                 </Button>

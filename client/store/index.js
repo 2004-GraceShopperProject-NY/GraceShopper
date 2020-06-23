@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import user from './user';
 import products from './products';
-import cart from './guestCart';
+import cart from './cart';
 import checkedOutInfo from './checkoutCart';
 
 const reducer = combineReducers({user, products, cart, checkedOutInfo});

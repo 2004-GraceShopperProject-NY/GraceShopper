@@ -75,24 +75,17 @@ router.put('/checkout/user', async (req, res, next) => {
       }
     });
     await order.update({bought: true});
-    const selectedItems = await SelectedItem.findAll({
-      where: {
-        orderId: order.id
-      }
-    });
-
     for (let productId in req.body.cart) {
       if (req.body.cart) {
         const product = await Product.findByPk(productId);
         await product.update({
           quantity:
-            parseInt(product.quantity) - parseInt(req.body.cart[productId])
+            parseInt(product.quantity, 10) -
+            parseInt(req.body.cart[productId], 10)
         });
       }
     }
-
-    console.log(selectedItems);
-    res.json(selectedItems);
+    res.json(order);
   } catch (error) {
     next(error);
   }
@@ -106,14 +99,16 @@ router.post('/checkout/guest', async (req, res, next) => {
     await order.save();
     // 2. add productId and quantity to order & create selecteditems
     for (let productId in req.body.cart) {
-      await order.addItemToOrder(productId, req.body.cart[productId]);
-
-      //3. update quantity in products/store inventory
-      const product = await Product.findByPk(productId);
-      await product.update({
-        quantity:
-          parseInt(product.quantity) - parseInt(req.body.cart[productId])
-      });
+      if (req.body.cart) {
+        await order.addItemToOrder(productId, req.body.cart[productId]);
+        //3. update quantity in products/store inventory
+        const product = await Product.findByPk(productId);
+        await product.update({
+          quantity:
+            parseInt(product.quantity, 10) -
+            parseInt(req.body.cart[productId], 10)
+        });
+      }
     }
     res.json(order);
   } catch (error) {

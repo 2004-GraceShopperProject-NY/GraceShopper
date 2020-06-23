@@ -10,7 +10,7 @@ import {
   removeFromDb,
   addToDb,
   updateDbQuantity
-} from '../store/guestCart';
+} from '../store/cart';
 
 export class SingleCartItem extends Component {
   constructor() {

@@ -142,16 +142,9 @@ form div {
   margin-left: 10px;
   background-color: yellow;
   color: darkcyan;
-  width: 100px;
   align-self: center;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-/* 
-.remove-icon {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-} */
 
 .quantity-input {
   display: flex;
@@ -192,6 +185,20 @@ form div {
   margin-left: 10px;
   background-color: #afeeee;
   color: black;
+}
+
+.delete {
+  background-color: red;
+  color: black;
+}
+
+.button-add-to-cart-1 {
+  margin-right: 10px;
+  margin-left: 10px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: darkcyan;
+  letter-spacing: 3px;
+  background-color: yellow;
 }
 
 .button-checkout {
@@ -280,13 +287,20 @@ form div {
   padding-left: 20px;
 }
 
-.title-single-product,
-.add-form-title {
+.title-single-product {
   padding-top: 10px;
   color: darkcyan;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   text-align: center;
   font-size: 20px;
+}
+
+.add-form-title {
+  padding-top: 10px;
+  color: darkcyan;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: center;
+  font-size: 25px;
 }
 
 .title-single-product-view {
@@ -516,4 +530,8 @@ form div {
   padding-right: 20px;
   padding-left: 20px;
   align-items: center;
+}
+
+.add-new-product-center {
+  text-align: center;
 }

@@ -22,7 +22,7 @@ import {
   getCartThunk,
   updateQuantityThunk,
   removeFromCart
-} from '../store/guestCart';
+} from '../store/cart';
 
 import store, {reducer} from '.';
 import {createStore} from 'redux';

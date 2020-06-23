@@ -59,6 +59,7 @@ export class SingleProduct extends Component {
           <input
             type="number"
             value={this.state.quantity}
+            min="0"
             name="quantity"
             onChange={this.handleInputChange}
             className="float-right"

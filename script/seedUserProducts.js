@@ -72,14 +72,14 @@ const admins = [
     lastName: 'Fauci',
     email: 'anthonyfauci@curecovid.com',
     password: 'coronaslayer',
-    role: 'admin'
+    role: 'customer'
   },
   {
     firstName: 'Andrew',
     lastName: 'Cuomo',
     email: 'andrewcuomo@nycslayscovid.gov',
     password: 'nycslayscovid',
-    role: 'admin'
+    role: 'customer'
   },
   {
     firstName: 'Anna',

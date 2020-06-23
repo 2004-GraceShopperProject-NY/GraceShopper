@@ -29,6 +29,7 @@ class MainNavbar extends Component {
                   />
                   <Link to="/home">Home</Link>
                   <Link to="/products">Products</Link>
+                  {this.props.isAdmin ? <Link to="/users">Users</Link> : ''}
                   <Link className="cart-navbar-link" to="/cart">
                     {' '}
                     <RiShoppingCartLine color="darkcyan" size={38} />
@@ -73,6 +74,7 @@ class MainNavbar extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
+    isAdmin: state.user.role === 'admin',
     cartQuantity: Object.values(state.cart).reduce((acc, qty) => {
       return acc + qty;
     }, 0)

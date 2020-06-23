@@ -33,7 +33,11 @@ a:hover {
 label {
   display: block;
 }
-
+.allUsers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .navbar-style {
   background-color: #afeeee;
 }

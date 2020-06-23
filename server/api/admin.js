@@ -3,7 +3,6 @@ const {User, Product} = require('../db/models');
 
 // checks if admin
 function adminOnly(req, res, next) {
-  console.log(req.user);
   if (req.user.role === 'admin') {
     next();
   } else {
@@ -28,7 +27,6 @@ router.get('/', adminOnly, async (req, res, next) => {
 
 router.put('/:productId', adminOnly, async (req, res, next) => {
   try {
-    const {quantity} = req.body;
     const [numOfAffectedRows, affectedRows] = await Product.update(req.body, {
       where: {
         id: req.params.productId

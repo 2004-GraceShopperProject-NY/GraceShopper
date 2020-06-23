@@ -29,11 +29,10 @@ export const deleteProduct = productId => {
   };
 };
 
-export const updateProductAdmin = (productId, quantity) => {
+export const updateProductAdmin = updatedInfo => {
   return {
     type: UPDATE_PRODUCT_ADMIN,
-    productId,
-    quantity
+    updatedInfo
   };
 };
 
@@ -71,10 +70,24 @@ export const deleteProductThunk = productId => {
   };
 };
 
-export const updateProductAdminThunk = (productId, quantity) => {
+export const updateProductAdminThunk = (productId, updatedInfo) => {
   return async dispatch => {
     try {
-      const {data} = await Axios.put(`/api/admin/${productId}`, {quantity});
+      console.log('first update', updatedInfo);
+      const updatedData = {};
+      if (updatedInfo.description.length !== 0) {
+        updatedData.description = updatedInfo.description;
+      }
+
+      if (updatedInfo.adminUpdateQuantity) {
+        updatedData.quantity = updatedInfo.adminUpdateQuantity;
+      }
+
+      if (updatedInfo.productName.length !== 0) {
+        updatedData.name = updatedInfo.productName;
+      }
+      console.log('UPDATE!', updatedData);
+      const {data} = await Axios.put(`/api/admin/${productId}`, updatedData);
       dispatch(updateProductAdmin(data));
     } catch (error) {
       console.log(error);
@@ -109,7 +122,7 @@ export default function productsReducer(state = initialState, action) {
     case UPDATE_PRODUCT_ADMIN:
       return {
         ...state,
-        selectedProduct: {...state.selectedProduct, quantity: action.quantity}
+        selectedProduct: action.updatedInfo
       };
     default:
       return state;

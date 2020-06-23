@@ -44,7 +44,7 @@ const products = [
     quantity: 100,
     price: '3500',
     imageUrl:
-      'https://www.kroger.com/product/images/xlarge/front/0038137117210',
+      'https://target.scene7.com/is/image/Target/GUEST_16903962-5ae1-426e-9981-9f41ce0e5292?wid=488&hei=488&fmt=pjpeg',
     description: 'Handy dandy first aid kit - pathto improved wellness'
   },
   {
@@ -121,8 +121,29 @@ function getUserSeed() {
   };
 }
 
+// 'https://i.pinimg.com/originals/b5/88/11/b588114d93f44174d71eba2839516172.jpg',
+
+function getMasksSeed() {
+  let maskColor = faker.commerce.color();
+  maskColor = maskColor[0].toUpperCase().concat(maskColor.slice(1));
+
+  let maskImage = [
+    'https://i.pinimg.com/originals/b5/88/11/b588114d93f44174d71eba2839516172.jpg',
+    'https://leelinesourcing.com/wp-content/uploads/2018/07/%E5%8D%AB%E7%94%9F%E5%8F%A3%E7%BD%A9.jpg'
+  ];
+  return {
+    name: maskColor + ' Mask',
+    quantity: faker.random.number(),
+    price: '2500',
+    imageUrl: maskImage[Math.round(Math.random())],
+    description:
+      'Choose a variety of colored masks to keep you survive this pandemic'
+  };
+}
+
 module.exports = {
   products,
   getUserSeed,
+  getMasksSeed,
   admins
 };

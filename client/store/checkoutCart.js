@@ -11,7 +11,6 @@ export const checkedOutCart = checkedOutInfo => {
   };
 };
 
-//TO BE EDITED!!!
 export const checkOutCart = cart => {
   return async (dispatch, getState) => {
     try {

@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {priceToDollar} from '../utilities/convertPriceToDollars';
-import {FcAbout} from 'react-icons/fc';
 import {FiDelete} from 'react-icons/fi';
-import {Col, Button} from 'reactstrap';
 import {
   updateQuantityThunk,
   removeFromCart,
@@ -32,13 +30,15 @@ export class SingleCartItem extends Component {
     } else if (quantity <= this.props.product.quantity) {
       this.props.updateQuantity(productId, quantity);
     } else {
-      alert('limit is reached');
+      alert(
+        'Sorry, we do not have enough of this product. Try adding less to your cart.'
+      );
     }
   };
 
   render() {
     const {product, quantity} = this.props;
-    const {id, name, imageUrl, price, description} = product;
+    const {id, name, imageUrl, price} = product;
     return (
       <div className="single-view-main">
         <div className="single-view-item">
@@ -72,8 +72,6 @@ export class SingleCartItem extends Component {
           <div className="item-total-price">
             {priceToDollar(price * quantity)}
           </div>
-          {/* <div>Item Price: {priceToDollar(price)}</div> */}
-          {/* <div>{description}</div> */}
         </div>
       </div>
     );

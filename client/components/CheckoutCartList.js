@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Button} from 'reactstrap';
 import {connect} from 'react-redux';
 import CheckoutCartItem from './CheckoutCartItem';
 import {priceToDollar} from '../utilities/convertPriceToDollars';

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Order, Product, SelectedItem} = require('../db/models');
+const {Order, Product} = require('../db/models');
 
 router.post('/', async (req, res, next) => {
   try {

@@ -9,7 +9,7 @@ import {Button} from 'reactstrap';
 const adapter = new Adapter();
 enzyme.configure({adapter});
 
-describe('<AllProducts /> component', () => {
+describe.only('<AllProducts /> component', () => {
   const allProducts = [
     {
       id: 1,
@@ -32,7 +32,11 @@ describe('<AllProducts /> component', () => {
   describe('AllProducts items', () => {
     it('renders the products passed in as props', () => {
       const wrapper = shallow(
-        <UnconnectedAllProducts products={allProducts} allProducts={() => {}} />
+        <UnconnectedAllProducts
+          products={allProducts}
+          allProducts={() => {}}
+          userLoggedIn={{role: 'customer'}}
+        />
       );
 
       expect(wrapper.text()).to.include('Catan');
@@ -70,6 +74,7 @@ describe('<AllProducts /> component', () => {
         <UnconnectedAllProducts
           products={differentProducts}
           allProducts={() => {}}
+          userLoggedIn={{role: 'customer'}}
         />
       );
       expect(wrapper.text()).to.not.include('Catan');
@@ -93,6 +98,7 @@ describe('<AllProducts /> component', () => {
       const props = {
         allProducts: () => {},
         addToCartThunk: () => {},
+        userLoggedIn: {role: 'customer'},
         products: []
       };
       const wrapper = shallow(<UnconnectedAllProducts {...props} />);
@@ -104,6 +110,7 @@ describe('<AllProducts /> component', () => {
       const props = {
         allProducts: () => {},
         addToCartThunk: () => {},
+        userLoggedIn: {role: 'customer'},
         products: [
           {
             id: '1',
@@ -123,6 +130,7 @@ describe('<AllProducts /> component', () => {
       const props = {
         allProducts: () => {},
         addToCartThunk: () => {},
+        userLoggedIn: {role: 'customer'},
         products: [
           {
             id: '1',

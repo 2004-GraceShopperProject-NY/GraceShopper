@@ -33,9 +33,11 @@ export class AllProducts extends Component {
       <div>
         <h2 className="title-all-products">What are you looking for today?</h2>
         {userLoggedIn.role === 'admin' ? (
-          <Button href="./add_new_product" className="button-add-to-cart">
-            Add new product
-          </Button>
+          <div className="add-new-product-center">
+            <Button href="./add_new_product" className="button-add-to-cart-1">
+              Add new product
+            </Button>
+          </div>
         ) : (
           ''
         )}
@@ -57,7 +59,10 @@ export class AllProducts extends Component {
               </Button>
 
               {userLoggedIn.role === 'admin' ? (
-                <Button onClick={() => deleteProduct(product.id)}>
+                <Button
+                  className="delete"
+                  onClick={() => deleteProduct(product.id)}
+                >
                   Delete Product
                 </Button>
               ) : (

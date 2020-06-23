@@ -22,7 +22,7 @@ const Product = db.define('product', {
     defaultValue: '2000'
   },
   imageUrl: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   description: {
     type: Sequelize.TEXT

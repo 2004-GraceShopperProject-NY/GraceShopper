@@ -46,7 +46,8 @@ router.put('/:productId', adminOnly, async (req, res, next) => {
 
 router.post('/', adminOnly, async (req, res, next) => {
   try {
-    const createProduct = await Product.create(req.body);
+    const product = req.body;
+    const createProduct = await Product.create(product);
     res.json(createProduct);
   } catch (error) {
     next(error);

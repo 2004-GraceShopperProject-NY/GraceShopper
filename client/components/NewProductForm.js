@@ -15,11 +15,12 @@ class NewProductForm extends Component {
       imageUrl: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.AdminAddNewProductThunk();
+    this.props.AdminAddNewProductThunk(this.state);
   }
 
   handleInputChange(event) {
@@ -27,10 +28,8 @@ class NewProductForm extends Component {
   }
 
   render() {
-    console.log(this.props);
-    const {product} = this.props;
     return (
-      <Form className="add-form">
+      <Form className="add-form" onSubmit={this.handleSubmit}>
         <div className="add-form-title">Add a new product</div>
         <div className="col-md-6 mb-3">
           <label htmlFor="name">Name</label>
@@ -99,8 +98,7 @@ class NewProductForm extends Component {
           />
         </div>
         <Button
-          onChange={this.handleSubmit}
-          // href="./products"
+          href="./products"
           size="lg"
           className="button-add-new-product"
           type="submit"
@@ -114,7 +112,7 @@ class NewProductForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    AdminAddNewProductThunk: () => dispatch(AdminAddNewProductThunk())
+    AdminAddNewProductThunk: data => dispatch(AdminAddNewProductThunk(data))
   };
 };
 

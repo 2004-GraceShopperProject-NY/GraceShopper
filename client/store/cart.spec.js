@@ -3,9 +3,6 @@ import enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
-import * as rrd from 'react-router-dom';
-
-const {MemoryRouter} = rrd;
 
 const middlewares = [thunkMiddleware];
 const mockStore = configureMockStore(middlewares);
@@ -23,7 +20,7 @@ import {
   getCartThunk,
   updateQuantityThunk,
   removeFromCart
-} from '../store/Cart';
+} from '../store/cart';
 
 import store, {reducer} from '.';
 import {createStore} from 'redux';
@@ -68,7 +65,7 @@ describe('Guest Cart Redux', () => {
       });
     });
 
-    it.only('getCartThunk thunk creator returns a thunk that gets cart items from local storage', () => {
+    it('getCartThunk thunk creator returns a thunk that gets cart items from local storage', () => {
       localStorage.setItem('cart', cart);
       fakeStore.dispatch(getCartThunk());
       const actions = fakeStore.getActions();

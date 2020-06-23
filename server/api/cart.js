@@ -6,7 +6,8 @@ router.get('/', async (req, res, next) => {
     if (req.user) {
       const order = await Order.findOne({
         where: {
-          userId: req.user.id
+          userId: req.user.id,
+          bought: false
         }
       });
       if (order) {

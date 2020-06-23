@@ -83,12 +83,18 @@ export const updateDbQuantity = (product, quantity) => {
 };
 
 export const getCartThunk = () => {
-  return dispatch => {
+  return async (dispatch, getState) => {
     try {
-      let cart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : {};
-      dispatch(getCartItems(cart));
+      const user = getState().user.id;
+      if (!user) {
+        let cart = localStorage.getItem('cart')
+          ? JSON.parse(localStorage.getItem('cart'))
+          : {};
+        dispatch(getCartItems(cart));
+      } else {
+        const {data} = await Axios.get('/api/cart');
+        dispatch(getCartItems(data));
+      }
     } catch (error) {
       console.log('Error getting cart: ', error);
     }

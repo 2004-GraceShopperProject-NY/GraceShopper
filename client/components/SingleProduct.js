@@ -75,7 +75,6 @@ export class SingleProduct extends Component {
         </div>
 
         {this.props.userLoggedIn.role === 'admin' ? (
-          // <div className="single-view-main-2">
           <div className="single-view-item-page2">
             <div className="update-product">
               <h2 className="title-single-product-view">
@@ -109,17 +108,12 @@ export class SingleProduct extends Component {
                   value={this.state.description}
                   onChange={this.handleInputChange}
                 />
-              </div>
-              <div className="button-update">
-                <Button
-                  onClick={this.updateProduct}
-                  className="button-add-to-cart"
-                >
+
+                <Button onClick={this.updateProduct} className="button-update">
                   UPDATE
                 </Button>
               </div>
             </div>
-            {/* </div> */}
           </div>
         ) : (
           ''

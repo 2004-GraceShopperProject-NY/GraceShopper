@@ -1,9 +1,37 @@
 const router = require('express').Router();
-const {Order, Product} = require('../db/models');
+const {Order, Product, SelectedItem} = require('../db/models');
+
+router.get('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const order = await Order.findOne({
+        where: {
+          userId: req.user.id
+        }
+      });
+      if (order) {
+        const selectedItems = await SelectedItem.findAll({
+          where: {
+            orderId: order.id
+          },
+          attributes: ['productId', 'quantity']
+        });
+        const cart = selectedItems.reduce((cartObj, item) => {
+          cartObj[item.productId] = item.quantity;
+          return cartObj;
+        }, {});
+        res.json(cart);
+      }
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post('/', async (req, res, next) => {
   try {
-    //don't need req.user because only user comes to this post route
     if (req.user) {
       const order = await Order.addOrCreateOrder(req.user.id);
       if (order) {
@@ -35,10 +63,12 @@ router.put('/', async (req, res, next) => {
           +req.body.quantity
         );
         res.json(item);
+      } else {
+        res.sendStatus(404);
       }
     }
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
@@ -59,6 +89,8 @@ router.delete('/:id', async (req, res, next) => {
         });
         await order.removeProduct(item);
         res.json(order);
+      } else {
+        res.sendStatus(404);
       }
     }
   } catch (error) {

@@ -1,76 +1,94 @@
 import {expect} from 'chai';
-import enzyme, {shallow} from 'enzyme';
+import enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import configureMockStore from 'redux-mock-store';
-import thunkMiddleware from 'redux-thunk';
+import {createStore, applyMiddleware} from 'redux';
+import enforceImmutableState from 'redux-immutable-state-invariant';
 
-const middlewares = [thunkMiddleware];
-const mockStore = configureMockStore(middlewares);
-
-const initialState = {
-  cart: {}
-};
-
-// import mockAxios from '../mock-axios';
-import {
-  updatedQuantity,
-  getCartItems,
-  removedItem,
-  addToCartThunk,
-  getCartThunk,
-  updateQuantityThunk,
-  removeFromCart
-} from '../store/cart';
-
-import store, {reducer} from '.';
-import {createStore} from 'redux';
+import cartReducer, {getCartItems, updatedQuantity} from '../store/cart';
 
 const adapter = new Adapter();
 enzyme.configure({adapter});
 
-function mockLocalStorage() {
-  let store = {};
-  return {
-    getItem: function(key) {
-      return store[key] || null;
-    },
-    setItem: function(key, value) {
-      store[key] = JSON.stringify(value);
-    },
-    removeItem: function(key) {
-      delete store[key];
-    },
-    clear: function() {
-      store = {};
-    }
-  };
-}
+// function mockLocalStorage() {
+//   let store = {};
+//   return {
+//     getItem: function (key) {
+//       return store[key] || null;
+//     },
+//     setItem: function (key, value) {
+//       store[key] = JSON.stringify(value);
+//     },
+//     removeItem: function (key) {
+//       delete store[key];
+//     },
+//     clear: function () {
+//       store = {};
+//     },
+//   };
+// }
 
-global.localStorage = mockLocalStorage();
+// global.localStorage = mockLocalStorage();
+
 const cart = {
   '1': 5,
-  '4': 3
+  '3': 3,
+  '2': 20
 };
 
-describe('Guest Cart Redux', () => {
-  let fakeStore;
-  beforeEach(() => {
-    fakeStore = mockStore(initialState);
-  });
-  describe('get cart items', () => {
-    it('getCartItems action creator', () => {
-      expect(getCartItems(cart)).to.deep.equal({
-        type: 'GET_CART_ITEMS',
-        cart
+const products = [
+  {
+    id: 2,
+    name: 'Mask',
+    price: 2000,
+    quantity: 100
+  },
+  {
+    id: 3,
+    name: 'Sanitizer',
+    price: 1000,
+    quantity: 80
+  },
+  {
+    id: 1,
+    name: 'Toilet Paper',
+    price: 800,
+    quantity: 50
+  }
+];
+
+describe('Cart Redux Store', () => {
+  describe('Action creators', () => {
+    describe('getCartItems action creator', () => {
+      it('it takes in a cart', () => {
+        expect(getCartItems(cart)).to.deep.equal({
+          type: 'GET_CART_ITEMS',
+          cart
+        });
       });
     });
 
-    it('getCartThunk thunk creator returns a thunk that gets cart items from local storage', () => {
-      localStorage.setItem('cart', cart);
-      fakeStore.dispatch(getCartThunk());
-      const actions = fakeStore.getActions();
-      expect(actions[0].type).to.equal('GET_CART_ITEMS');
-      expect(actions[0].cart).to.deep.equal(cart);
+    describe('updatedQuantity action creator', () => {
+      it('it takes in a product id and quantity', () => {
+        const productId = products[1].id;
+        const quantity = cart[productId];
+
+        expect(updatedQuantity(productId, quantity)).to.be.deep.equal({
+          type: 'UPDATE_QUANTITY',
+          productId,
+          quantity
+        });
+      });
+    });
+  });
+
+  describe('Reducer', () => {
+    it('returns the initial state by default', () => {
+      const store = createStore(
+        cartReducer,
+        applyMiddleware(enforceImmutableState())
+      );
+
+      expect(store.getState()).to.be.an('object');
     });
   });
 });

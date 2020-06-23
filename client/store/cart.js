@@ -39,7 +39,10 @@ export const addToCartThunk = (product, quantity) => {
       let productId = product.id;
       cart[productId] = cart[productId] ? cart[productId] : 0;
       let qty = parseInt(cart[productId], 10) + parseInt(quantity, 10);
-      if (product.quantity < qty) {
+      if (product.quantity === 0) {
+        alert('Sorry, we are out of stock!');
+        return;
+      } else if (product.quantity < qty) {
         cart[productId] = product.quantity;
       } else {
         cart[productId] = qty;
@@ -55,6 +58,11 @@ export const addToCartThunk = (product, quantity) => {
 export const addToDb = (product, quantity) => {
   return async () => {
     try {
+      if (product.quantity === 0) {
+        return;
+      } else if (quantity > product.quantity) {
+        quantity = product.quantity;
+      }
       await Axios.post('/api/cart', {product, quantity});
     } catch (error) {
       console.error(error);

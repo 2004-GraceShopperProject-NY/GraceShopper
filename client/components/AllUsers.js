@@ -11,7 +11,7 @@ export class AllUsers extends Component {
     const {allUsers} = this.props;
 
     return (
-      <div>
+      <div className="all-users-main">
         <h2 className="title-all-products">Registered Customers</h2>
         <div className="allUsers">
           <table className="table table-hover">

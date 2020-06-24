@@ -68,9 +68,6 @@ class MainNavbar extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,

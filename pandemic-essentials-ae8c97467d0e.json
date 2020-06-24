@@ -1,0 +1,15 @@
+{
+  "type": "service_account",
+  "project_id": "pandemic-essentials",
+  "private_key_id": "ae8c97467d0e2097032a142676a7eb42104e9096",
+  "private_key":
+    "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDggRziqXynWln2\nYuX8odeO14N6Vbqju8hoWrEzJBbf32rzRjUTHyeEdkZDSzdY0K+B8Uyfl6DsMRNf\nvoeFgXIDS70NT6PhvaqnqUArwbQIh3J6heIK+sQN9q2qz69IPu9vgCThno2OLPWr\nCpDXYVGpmLLnbSd5C09G312V/0DUV74xb82JQHU1lJmc9SNH8B7P4nsxR2grR9XU\nI3wcp/qqBYSAXjrwmSowx/UYwLYa6DEF58Wp0F2m6mishpK2zDsYwzUcPwJt4F4u\nmVC+iDBONcvNwDF8wi4Fq8cQdcTIIw1NIj1s6Y0P0ylHab4cu+tvIUVN5TRaf3kK\nVD9u8DNPAgMBAAECggEAF3VmT0jmfZYzUEuFPKCspYBffKj4l6NHjZ/sZCuhOENg\nKYtsgFMBDhZNwTpazi0AKdPM7eAqMIPwQlDmWEzuXOnNF1b7CNuIuXw1+FyFM17z\n11mmBP+u/MaJ3w9UgXgSDNSXBfxLTk/kW7r+54KDxfTuvL/rH/rOjdlJLiM94vIW\nEH2Myw1GKkq27FvawFZZJgJpOvtpH//tCv0OWqigUsvAfjw7k3BuK8wdCP0vul92\nN03qxmWmQHcpyFweS9St2qoqQGKobVvYHJhgPzlD+6I2xNBYtBO5iJi07WnQ8hXT\nYalDZyhB+k0JeT+kTrGqRMnSF6+jib955Gj1OJxsAQKBgQD1L0TwFXnh+5SkXi5W\n5ktOWBwCxH8BCin6xUz/0znOn8KKFocWXkPs3hGcmG2RPHfF4T6j2fO+92PZpoj2\niwYuZMOqegL9bAnXX4oBBGcHKGYIXvU3PquICWWorIrnVajuGMJhmljf46tC+6IH\nW9Yjcsf1m2g2jgKuifKdpRXA5wKBgQDqaFAM+yzPWt04kdAaR+IRM8Edm0N22jLm\nnNDAyJI/WfWyQ66ziYKjJXfPVqvwjIaHAJ5JubcQGhbsWYIlcaTKVcq45L4VJ/Vs\nxhHSbwHwJGI3NRs4SGPlhlu+deiIqnK9beuhycFhtlxk3WIffRXlDYqy7jySYehR\niKYOlvNlWQKBgGz4CDSH5vaXwJVYwlGe4qM8J57XQ/brVIL+g11DvHJnsKd8oadA\nWAIDJGKroC6naDgLBrL94AXkn30RNdgVK7cc05WFyqRlCu6sqIIROdUFkGtyAJv/\n/25jdsoDfWyZNo4zdNi6J3vCDNClU3rfxwlULyiqXCO689gsuSZ1Q3jLAoGBAOed\nMpvhA6HPco8W5L1TEblVnheW9s5VQ75CbLJQfNFEHlWKMvELip2RxBSG21XQRIzY\nu461hoDOhp/6wXImHGIg6zJOMtPMq+BSxgFb1lpmWPWb781pGewNGlHTR3TiloU+\nO3mdVQsrmZfAd9gNTLkK7GVoqUkqnNcTYqE/3jfhAoGBAMWwmxb2J8FFRRh5GdZf\nyyKLvk3YeQoULrvJ5Z4nboPgiMBNADC5at0eDGgXdweFSZScLJKKpn6kNE2CFS+3\n4RIYD9XNKp7TbULfGqgZODTjJe2EvcXLdjjWKS31xoYcArcYLNbU9u/HDXcfIIL9\nvkBbQGcbgQo0cItPPwPH5FmU\n-----END PRIVATE KEY-----\n",
+  "client_email":
+    "pandemic-essentials@pandemic-essentials.iam.gserviceaccount.com",
+  "client_id": "114829872254575913869",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url":
+    "https://www.googleapis.com/robot/v1/metadata/x509/pandemic-essentials%40pandemic-essentials.iam.gserviceaccount.com"
+}

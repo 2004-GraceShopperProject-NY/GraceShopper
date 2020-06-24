@@ -1,12 +1,10 @@
 import Axios from 'axios';
 
-//ACTION TYPES
 const ALL_PRODUCTS = 'ALL_PRODUCTS';
 const SINGLE_PRODUCT = 'SINGLE_PRODUCT';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const UPDATE_PRODUCT_ADMIN = 'UPDATE_PRODUCT_ADMIN';
 
-//ACTION CREATORS
 export const allProducts = products => {
   return {
     type: ALL_PRODUCTS,
@@ -35,7 +33,6 @@ export const updateProductAdmin = updatedInfo => {
   };
 };
 
-//THUNK
 export const fetchProducts = () => {
   return async dispatch => {
     try {

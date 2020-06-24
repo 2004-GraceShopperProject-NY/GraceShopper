@@ -33,7 +33,6 @@ class CheckoutPayment extends Component {
 
   render() {
     const {cart} = this.props;
-    console.log('cart in component', this.props.cart);
 
     return (
       <Container className="container">

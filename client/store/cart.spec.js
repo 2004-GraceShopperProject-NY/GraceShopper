@@ -9,26 +9,6 @@ import cartReducer, {getCartItems, updatedQuantity} from '../store/cart';
 const adapter = new Adapter();
 enzyme.configure({adapter});
 
-// function mockLocalStorage() {
-//   let store = {};
-//   return {
-//     getItem: function (key) {
-//       return store[key] || null;
-//     },
-//     setItem: function (key, value) {
-//       store[key] = JSON.stringify(value);
-//     },
-//     removeItem: function (key) {
-//       delete store[key];
-//     },
-//     clear: function () {
-//       store = {};
-//     },
-//   };
-// }
-
-// global.localStorage = mockLocalStorage();
-
 const cart = {
   '1': 5,
   '3': 3,

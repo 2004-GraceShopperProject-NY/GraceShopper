@@ -41,7 +41,7 @@
   "author": "Anna Morozova, Connie Lok, Eda Deniz, Jennifer Yang ",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "chai-spies": "^1.0.0",
     "compression": "^1.7.3",
